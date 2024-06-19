@@ -1,0 +1,11 @@
+Data Peserta Super Bootcamp Laravel Vue Development
+1. Nama: Aldy Blaya Diprana
+2. Email: alzxdt@gmail.com
+3. Sistem Operasi yang digunakan: Windows 11
+4. Akun Gitlab/Github: https://github.com/alzxdy123
+5. Akun Telegram: https://t.me/AldyBD
+
+setelah itu tinggal jalankan
+git add .
+git commit -m "Sudah selesai"
+git push origin main atau git push origin master
