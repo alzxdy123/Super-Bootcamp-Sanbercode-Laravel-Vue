@@ -1,0 +1,37 @@
+a. Buat table 
+
+1. CREATE TABLE genre (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+2. CREATE TABLE Movie (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    summary TEXT,
+    year INT,
+    poster VARCHAR(255),
+    genre_id INT, 
+    FOREIGN KEY (genre_id) REFERENCES genre(id)
+);
+
+==================================================================================================
+
+b. Insert table
+
+1. INSERT INTO Movie (title, summary, year, poster, genre_id) VALUES 
+    ('Movie A', 'Summary Movie A', 2023, 'poster_a.jpg', 1),
+    ('Movie B', 'Summary Movie B', 2022, 'poster_b.jpg', 2),
+    ('Movie C', 'Summary Movie C', 2022, 'poster_c.jpg', 1);
+
+2. INSERT INTO Genre (name) VALUES
+    ('Action'),
+    ('Drama');
+
+===================================================================================================
+
+3. Select table
+
+1. SELECT * FROM movie where genre_id = '1';
+
+2. SELECT * FROM movie INNER JOIN genre ON movie.genre_id = genre.id WHERE movie.genre_id = 1;
