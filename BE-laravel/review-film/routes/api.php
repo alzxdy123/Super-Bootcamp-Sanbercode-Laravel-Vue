@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CastController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,4 +18,6 @@ use Illuminate\Support\Facades\Route;
 */
 Route::prefix('v1')->group(function () {
     Route::apiResource('movie', MovieController::class);
+    Route::apiResource('cast', CastController::class);
+    Route::apiResource('genre', GenreController::class);
 });
