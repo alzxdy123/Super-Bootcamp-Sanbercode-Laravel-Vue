@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('movies', function (Blueprint $table) {
             $table->uuid('genre_id')->after('year');
-            $table->foreign('genre_id')->references('id')->on('movies')->onDelete('cascade');
+            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
         });
     }
 
