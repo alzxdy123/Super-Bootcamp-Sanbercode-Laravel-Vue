@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Carbon\Carbon;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
@@ -15,11 +16,6 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuids;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -27,21 +23,11 @@ class User extends Authenticatable implements JWTSubject
         'role_id'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
+ 
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -54,5 +40,37 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public static function boot() {
+        parent::boot();
+
+        static::created(function($model) {
+            $model->generateOtp();
+        });
+    }
+
+    public function generateOtp() {
+        do {
+            $otp = rand(100000, 999999);
+            $check = Otps::where('otp', $otp)->exists();
+        } while ($check);
+
+        $now = Carbon::now();
+        $valid_until = $now->addMinutes(5);
+
+        Otps::updateOrCreate(
+            ['user_id' => $this->id],
+            [
+                'otp' => $otp,
+                'valid_until' => $valid_until,
+            ]
+        );
+
+        return response()->json([
+            'message' => 'Otp berhasil dikirim',
+            'user' => $this,
+            'otp' => $otp
+        ]);
     }
 }
