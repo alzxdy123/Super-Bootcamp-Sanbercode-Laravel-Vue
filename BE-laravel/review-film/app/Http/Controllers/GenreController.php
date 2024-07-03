@@ -38,7 +38,7 @@ class GenreController extends Controller
      */
     public function show(string $id)
     {
-        $genre = Genre::find($id);
+        $genre = Genre::with('listMovie')->find($id);
 
         if(!$genre) {
             return response()->json([

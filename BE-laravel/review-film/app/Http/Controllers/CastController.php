@@ -11,6 +11,11 @@ class CastController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware(['auth:api', 'admin'])->only(['store', 'update', 'destroy']);
+    }
+
     public function index()
     {
         $cast = Cast::all();
@@ -38,7 +43,7 @@ class CastController extends Controller
      */
     public function show(string $id)
     {
-        $cast = Cast::find($id);
+        $cast = Cast::with('listMovie')->find($id);
 
         if(!$cast) {
             return response()->json([

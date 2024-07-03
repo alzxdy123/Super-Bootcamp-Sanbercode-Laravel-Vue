@@ -12,4 +12,14 @@ class CastMovie extends Model
 
     protected $table = 'cast_movie';
     protected $fillable = ['name', 'movie_id', 'cast_id'];
+
+    public function movie()
+    {
+        return $this->belongsTo(Movie::class);
+    }
+
+    public function cast()
+    {
+        return $this->belongsTo(Cast::class);
+    }
 }

@@ -46,7 +46,7 @@ class CastMovieController extends Controller
      */
     public function show(string $id)
     {
-        $castMovie = CastMovie::findOrFail($id);
+        $castMovie = CastMovie::with('movie', 'cast')->findOrFail($id);
 
         return response()->json([
             'data' => $castMovie

@@ -19,4 +19,12 @@ class Movie extends Model
     ];
 
     protected $primaryKey = 'id';
+
+    public function genre() {
+        return $this->belongsTo(Genre::class, 'genre_id');
+    }
+
+    public function listCast() {
+        return $this->hasMany(CastMovie::class, 'movie_id');
+    }
 }

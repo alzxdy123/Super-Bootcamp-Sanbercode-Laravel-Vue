@@ -16,7 +16,7 @@ class ReviewController extends Controller
 
         $currentUser = auth()->user();
 
-        Review::updateOrCreate(
+        $review = Review::updateOrCreate(
             ['user_id' => $currentUser->id],
             [
                 'movie_id' => $request->movie_id,
@@ -27,7 +27,8 @@ class ReviewController extends Controller
     );
 
         return response()->json([
-            'message' => 'Review berhasil ditambahkan!'
+            'message' => 'Review berhasil ditambahkan / diperbarui',
+            'data' => $review
         ]);
     }
 

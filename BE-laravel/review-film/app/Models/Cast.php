@@ -15,4 +15,8 @@ class Cast extends Model
         'age',
         'bio'
     ];
+
+    public function listMovie() {
+        return $this->hasMany(CastMovie::class, 'cast_id');
+    }
 }
