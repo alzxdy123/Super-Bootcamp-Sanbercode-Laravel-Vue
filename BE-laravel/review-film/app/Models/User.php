@@ -80,7 +80,7 @@ class User extends Authenticatable implements JWTSubject
     }
     
 
-    public function Otp() {
+    public function otp_code() {
         return $this->hasOne(Otps::class, 'user_id');
     }
 }

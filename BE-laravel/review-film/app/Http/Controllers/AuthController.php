@@ -12,6 +12,8 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Mail\OTPMail;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -35,7 +37,12 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'role_id' => $userRole->id
         ]);
+
+        $user->generateOtp();
+
         $token = JWTAuth::fromUser($user);
+
+        Mail::to($user->email)->queue(new OTPMail($user));
 
         return response()->json(compact('user', 'token'), 201);
     }
