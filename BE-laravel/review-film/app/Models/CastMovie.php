@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class CastMovie extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table ='roles';
-
-    protected $fillable = ['name'];
+    protected $table = 'cast_movie';
+    protected $fillable = ['name', 'movie_id', 'cast_id'];
 }

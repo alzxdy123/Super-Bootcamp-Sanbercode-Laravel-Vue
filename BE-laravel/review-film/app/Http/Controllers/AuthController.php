@@ -44,6 +44,8 @@ class AuthController extends Controller
     {
         $user = auth()->user();
 
+        // $currentUser = User::with('Profile')->find($user->id);
+
         return response()->json([
             'data' => $user]);
     }
@@ -53,7 +55,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (!$user = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'login failed'], 401);
         }
 
         $userData = User::where('email', $request->email)->first();
