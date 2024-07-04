@@ -40,21 +40,21 @@ class AuthController extends Controller
 
         $user->generateOtp();
 
-        $token = JWTAuth::fromUser($user);
+        // $token = JWTAuth::fromUser($user);
 
         Mail::to($user->email)->queue(new OTPMail($user));
 
-        return response()->json(compact('user', 'token'), 201);
+        return response()->json(['user' => $user], 201);
     }
 
     public function getUser()
     {
         $user = auth()->user();
 
-        // $currentUser = User::with('Profile')->find($user->id);
+        $currentUser = User::with('profile')->find($user->id);
 
         return response()->json([
-            'data' => $user]);
+            'data' => $currentUser]);
     }
 
     public function login(Request $request)
@@ -103,6 +103,8 @@ class AuthController extends Controller
 
         $user = User::where('id', $currentUser->id)->first();
         $user->generateOtp();
+
+        Mail::to($user->email)->queue(new OTPMail($user));
 
         return response()->json([
             'message' => 'OTP berhasil dikirim ulang'
