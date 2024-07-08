@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="public/css/style.css" />
+    <style>
+        .list-nav {
+          display: flex;
+        }
+
+        .nav-link {
+            margin-right: 10px;
+            padding: 5px 10px 5px 10px;
+
+        }
+        .nav-link a {
+            color: black;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            border-bottom: 2px solid rgb(35, 35, 104);
+        }
+
+        .active {
+            border-bottom: 2px solid rgb(35, 35, 104);
+        }
+      </style>  
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <img src="public/images/logo.png" width="150" alt="" />
+      </div>
+      <div class="list-nav">
+        <div class="nav-link active"><a href="index.html">Home</a></div>
+        <div class="nav-link"><a href="Auth/register.html">Register</a></div>
+        <div class="nav-link"><a href="article.html">Article</a></div>
+      </div>
+    </nav>
+
+    <main>
+      <section>
+        <div class="header">
+          <img src="public/images/logo.png" width="150" alt="" />
+          <div class="title">Sanber Campus 2023 | MERN Stack</div>
+          <div class="user">
+            Halo! Saya <b>Aldy Balya diprana</b>, Dari Sanber Campus 2023
+          </div>
+        </div>
+        <div class="body">
+          <h2>Data Peserta Sanber Campus 2023</h2>
+          <br />
+          <ul>
+            <li>
+              <div class="wrapper">Nama Peserta:</div>
+              Aldy Balya Diprana
+            </li>
+            <li>
+              <div class="wrapper">Email:</div>
+              alzxdy@gmail.com
+            </li>
+            <li>
+              <div class="wrapper">Sistem Operasi:</div>
+              Windows 11
+            </li>
+            <li>
+              <div class="wrapper">Akun gitlab:</div>
+              alzxdy123
+            </li>
+            <li>
+              <div class="wrapper">Akun telegram:</div>
+              <a href="https://t.me/AldyBD">AldyBD</a>
+            </li>
+          </ul>
+          <br />
+          <h2>Cara Belajar Di Sanber Campus 2023</h2>
+          <br />
+          <ol>
+            <li>Mengunjungi Website ini</li>
+            <li>Mendaftar di <a href="Auth/register.html">Sini</a></li>
+            <li>Selasai !</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+    <footer>Copyright @ 2023 by Sanbercode</footer>
+  </body>
+</html>

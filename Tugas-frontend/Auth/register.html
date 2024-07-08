@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../public/css/register.css" />
+    <style>
+      .list-nav {
+        display: flex;
+      }
+
+      .nav-link {
+        margin-right: 10px;
+        padding: 5px 10px 5px 10px;
+      }
+      .nav-link a {
+        color: black;
+        font-weight: bold;
+      }
+
+      .nav-link:hover {
+        border-bottom: 2px solid rgb(35, 35, 104);
+      }
+
+      .active {
+        border-bottom: 2px solid rgb(35, 35, 104);
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <img src="../public/images/logo.png" width="150" alt="" />
+      </div>
+      <div class="list-nav">
+        <div class="nav-link"><a href="../index.html">Home</a></div>
+        <div class="nav-link active"><a href="register.html">Register</a></div>
+        <div class="nav-link"><a href="../article.html">Article</a></div>
+      </div>
+    </nav>
+
+    <main>
+      <form action="process.html" method="post">
+        <h2>Register Akun Baru</h2>
+
+        <h4>Isilah Form Di Bawah Ini!</h4>
+
+        <div class="name">
+          <label>First Name :</label>
+          <input required type="text" />
+          <label>Last Name :</label>
+          <input required type="text" />
+        </div>
+
+        <div class="gender wrapper">
+          <label>Gender :</label>
+          <input required type="radio" name="gender" value="male" /> Male
+          <input required type="radio" name="gender" value="female" /> Female
+        </div>
+
+        <div class="nationality wrapper">
+          <label>Nationality :</label>
+          <select name="nationality" id="nationality" required>
+            <option value="1">Indonesia</option>
+            <option value="2">Malaysia</option>
+            <option value="3">Singapura</option>
+            <option value="4">Thailand</option>
+          </select>
+        </div>
+
+        <div class="learn wrapper">
+          <label>Sedang Fokus Belajar :</label>
+          <select name="learn" id="learn" required>
+            <option value="1">Vue JS</option>
+            <option value="2">Laravel</option>
+            <option value="3">Next JS</option>
+            <option value="4">Golang</option>
+          </select>
+        </div>
+
+        <div class="language wrapper">
+          <label>Language Spoken :</label>
+          <input type="checkbox" name="language" value="Indonesia" />
+          Indonesia
+          <input type="checkbox" name="language" value="English" /> English
+          <input type="checkbox" name="language" value="Japanese" /> Japanese
+        </div>
+
+        <label>Deskripsi Diri Saya</label>
+        <textarea
+          name="description"
+          id="description"
+          cols="30"
+          rows="10"
+          required
+        ></textarea>
+
+        <button type="submit">Register</button>
+      </form>
+    </main>
+    <footer>Copyright @ 2023 by Sanbercode</footer>
+  </body>
+</html>
