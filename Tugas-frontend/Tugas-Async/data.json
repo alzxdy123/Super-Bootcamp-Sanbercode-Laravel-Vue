@@ -1,0 +1,20 @@
+[
+  { "name": "aldy", "password": "12345", "role": "admin", "isLogin": true },
+  { "name": "azi", "password": "abcdef", "role": "admin", "isLogin": true },
+  { "name": "erlang", "password": "123", "role": "admin", "isLogin": false },
+  {
+    "name": "irpan",
+    "password": "abc",
+    "role": "trainer",
+    "isLogin": false,
+    "students": [{ "name": "daffa" }, { "name": "daffi" }, { "name": "erlang" }]
+  },
+  { "name": "syarif", "password": "dobble", "role": "admin", "isLogin": true },
+  {
+    "name": "alfarabi",
+    "password": "abe",
+    "role": "trainer",
+    "isLogin": true,
+    "students": [{ "name": "ajrial" }]
+  }
+]
