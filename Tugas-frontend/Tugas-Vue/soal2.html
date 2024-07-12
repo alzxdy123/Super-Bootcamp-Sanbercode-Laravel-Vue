@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VueJS Course</title>
+    <style></style>
+  </head>
+
+  <body>
+    <div id="app">
+      <table border="1" width="400px">
+        <thead>
+          <th>#</th>
+          <th>name</th>
+          <th>age</th>
+          <th>address</th>
+        </thead>
+
+        <tbody>
+          <tr v-for="(person, index) in people">
+            <td>{{ index + 1 }}</td>
+            <td>{{ person.name }}</td>
+            <td>{{ person.age }}</td>
+            <td>{{ person.address }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref, reactive } = Vue;
+
+      createApp({
+        setup() {
+          const people = reactive([
+            { name: "Rezky", age: 26, address: "makassar" },
+            { name: "Andi", age: 18, address: "Jakarta" },
+            { name: "Budi", age: 33, address: "bali" },
+          ]);
+          return {
+            people,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

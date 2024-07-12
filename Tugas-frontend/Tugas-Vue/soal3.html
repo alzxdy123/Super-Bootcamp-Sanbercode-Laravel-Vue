@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VueJS Course</title>
+    <style></style>
+  </head>
+
+  <body>
+    <div id="app">
+      <form @submit.prevent="validate">
+        <ul v-if="isError">
+          <li v-if="errMessage.username">{{ errMessage.username }}</li>
+          <li v-if="errMessage.password">{{ errMessage.password }}</li>
+        </ul>
+
+        <label>Username</label> <br />
+        <br />
+        <input type="text" v-model="data.username" /> <br />
+        <br />
+        <label>Password</label> <br /><br />
+        <input type="password" v-model="data.password" /> <br /><br />
+
+        <button type="submit">Validate</button>
+      </form>
+
+      <h1 v-if="validated">Output</h1>
+
+      <ul v-if="validated">
+        <li>Username: {{ output.username }}</li>
+        <li>Password: {{ output.password }}</li>
+      </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref, reactive } = Vue;
+
+      createApp({
+        setup() {
+          const data = reactive({
+            username: "",
+            password: "",
+          });
+
+          const isError = ref(false);
+          const errMessage = reactive({
+            username: "",
+            password: "",
+          });
+
+          const output = reactive({
+            username: "",
+            password: "",
+          });
+
+          const validated = ref(false);
+
+          const validateUsername = () => {
+            if (data.username === "") {
+              errMessage.username = "Username harus diisi";
+              return false;
+            } else if (data.username.length < 8) {
+              errMessage.username = "Username minimal 8 karakter";
+              return false;
+            } else {
+              errMessage.username = "";
+              return true;
+            }
+          };
+
+          const validatePassword = () => {
+            if (data.password === "") {
+              errMessage.password = "Password harus diisi";
+              return false;
+            } else if (data.password.length < 8) {
+              errMessage.password = "Password minimal 8 karakter";
+              return false;
+            } else {
+              errMessage.password = "";
+              return true;
+            }
+          };
+
+          const validate = () => {
+            const isUsernameValid = validateUsername();
+            const isPasswordValid = validatePassword();
+            isError.value = !isUsernameValid || !isPasswordValid;
+
+            if (!isError.value) {
+              validated.value = true;
+              output.username = data.username;
+              output.password = data.password;
+            } else {
+              validated.value = false;
+            }
+          };
+
+          return {
+            data,
+            errMessage,
+            isError,
+            output,
+            validate,
+            validated,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
