@@ -18,6 +18,15 @@ p {
   font-size: 18px;
 }
 
-[data-theme="dark"] * {
+/* [data-theme="dark"] * {
   color: white;
+} */
+
+.active-link {
+  background: linear-gradient(to right, #b3ffab, #12fff7);
+  color: black;
+}
+
+.bg-gradient-linear {
+  background: linear-gradient(to right, #b3ffab, #12fff7);
 }
