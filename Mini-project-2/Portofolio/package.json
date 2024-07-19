@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "jam-icons": "^2.0.0",
+    "pinia": "^2.1.7",
     "primeicons": "^7.0.0",
     "theme-change": "^2.5.0",
     "vue": "^3.4.29",

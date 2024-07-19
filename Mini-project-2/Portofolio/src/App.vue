@@ -1,12 +1,13 @@
 <template>
-  <main
-    class="bg-white text-black"
-    :class="['w-100 flex h-screen lg:justify-center', isDarkMode ? 'dark' : '']"
-  >
+  <main class="bg-white text-black w-100 flex h-screen lg:justify-center">
     <div class="container flex gap-2">
       <Sidebar />
       <div class="h-full overflow-y-auto custom-scrollbar">
-        <RouterView />
+        <RouterView v-slot="{ Component, route }">
+          <Transition name="bounce">
+            <component :is="Component" :key="route.path" />
+          </Transition>
+        </RouterView>
       </div>
     </div>
     <Footbar />
@@ -16,34 +17,7 @@
 <script setup>
 import Sidebar from "./components/Sidebar.vue";
 import Footbar from "./components/Footbar.vue";
-import { ref, onMounted, watch } from "vue";
-
-// Dark mode state
-const isDarkMode = ref(false);
-
-// Function to update dark mode state from LocalStorage
-const updateDarkModeFromLocalStorage = () => {
-  const darkModePreference = localStorage.getItem("darkMode");
-  isDarkMode.value = darkModePreference === "true";
-  console.log(
-    "🚀 ~ updateDarkModeFromLocalStorage ~ isDarkMode:",
-    isDarkMode.value
-  );
-};
-
-// Check for dark mode preference in LocalStorage on mount
-onMounted(() => {
-  updateDarkModeFromLocalStorage();
-
-  // Add event listener for storage changes
-  window.addEventListener("storage", updateDarkModeFromLocalStorage);
-});
-
-// Watch for changes to isDarkMode and update LocalStorage
-watch(isDarkMode, (newVal) => {
-  localStorage.setItem("darkMode", newVal);
-  document.documentElement.classList.toggle("dark", newVal);
-});
+import { RouterView } from "vue-router";
 </script>
 
 <style scoped>
@@ -58,15 +32,33 @@ watch(isDarkMode, (newVal) => {
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1100px;
 }
 
-/* Ensure dark mode styles are defined globally */
-.dark .bg-white {
-  background-color: #000;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
 
-.dark .text-black {
-  color: #fff;
+.fade-enter, .fade-leave-to /* .fade-leave-active in versions <2.1.8 */ {
+  opacity: 0;
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
 }
 </style>

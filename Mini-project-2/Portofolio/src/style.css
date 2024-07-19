@@ -27,6 +27,6 @@ p {
   color: black;
 }
 
-.bg-gradient-linear {
+.gradient1 {
   background: linear-gradient(to right, #b3ffab, #12fff7);
 }

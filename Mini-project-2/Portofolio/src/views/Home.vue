@@ -14,7 +14,7 @@
         <h1 class="text-3xl font-extrabold">
           Call me
           <span
-            class="bg-gradient-linear capitalize dark:text-transparent dark:bg-clip-text"
+            class="bg-gradient1 capitalize dark:text-transparent dark:bg-clip-text"
             >{{ name }}</span
           >
         </h1>
@@ -34,8 +34,8 @@
           />
         </div>
       </div>
+      <Footer></Footer>
     </section>
-    <Footer></Footer>
   </div>
 </template>
 
@@ -44,20 +44,9 @@ import Title from "../components/Title.vue";
 import Footer from "../components/Footer.vue";
 import Profile from "../components/Profile.vue";
 import Experience from "../components/Experiece.vue";
-import { reactive, ref } from "vue";
+import { useHomeStore } from "../store/home";
+import { storeToRefs } from "pinia";
 
-const name = ref("aldy");
-const profession = ref("fullstack web developer");
-const bio = ref(
-  "Working within Vue Js & Laravel, transform ideas into digital realities that are <br /> easily accessible and inclusive for web users."
-);
-
-const ExperienceLists = reactive([
-  {
-    name: "Frontend Developer",
-    company: "PT. Sarana Pactindo",
-    location: "Bandung",
-    date: "October 2023 - May 2024",
-  },
-]);
+const homeStore = useHomeStore();
+const { name, profession, bio, ExperienceLists } = storeToRefs(homeStore);
 </script>

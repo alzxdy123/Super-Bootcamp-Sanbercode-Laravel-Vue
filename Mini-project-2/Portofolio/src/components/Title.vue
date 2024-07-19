@@ -1,5 +1,5 @@
 <template>
-  <div class="border-bottom-1 pb-10 md:pb-5 wrapper" style="max-height: 93px">
+  <div class="border-bottom-1 pb- md:pb-5 wrapper">
     <h1 class="text-2xl font-bold mb-3 capitalize">{{ title }}</h1>
     <p class="text-lg capitalize">{{ subTitle }}</p>
   </div>

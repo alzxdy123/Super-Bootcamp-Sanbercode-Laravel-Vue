@@ -4,7 +4,11 @@ export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        gradient1: "linear-gradient(to right, #b3ffab, #12fff7)",
+      },
+    },
   },
   plugins: [
     require("@tailwindcss/typography"),
