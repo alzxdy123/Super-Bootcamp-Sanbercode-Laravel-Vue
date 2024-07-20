@@ -8,6 +8,10 @@ export default {
       backgroundImage: {
         gradient1: "linear-gradient(to right, #b3ffab, #12fff7)",
       },
+      colors: {
+        primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
+      },
     },
   },
   plugins: [

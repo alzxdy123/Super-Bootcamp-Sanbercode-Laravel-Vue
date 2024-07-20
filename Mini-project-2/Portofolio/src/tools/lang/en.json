@@ -1,0 +1,68 @@
+{
+  "test": "english",
+
+  "sidebar": {
+    "about": "About",
+    "project": "Project",
+    "skill": "Skill",
+    "light": "Light",
+    "dark": "Dark"
+  },
+
+  "about": {
+    "title": "About",
+    "subTitle": "About Me",
+    "text1": "Hi! I'm Aldy. I started learning web development at the beginning of the pandemic. With not much else to do, I decided to begin my web development journey through web development forums. After that, I started watching various YouTube videos to delve deeper into web development, especially in terms of frontend development.",
+    "text2": "I'm eager to expand my knowledge and skills in frontend development, as there is a vast array of technologies and concepts to explore. I find great satisfaction in the process of acquiring new information and techniques, and I'm highly motivated to keep learning and growing. I value constructive feedback as it helps me refine my abilities and enhance my overall proficiency.",
+    "text3": "Through this website, I plan to share my thoughts and showcase the projects I've worked on. I firmly believe that documenting what I've learned is an excellent method to solidify my understanding, and it also allows me to impart my knowledge with others. Please don't hesitate to reach out, and I'll be delighted to assist you!",
+    "address": "Im Living In",
+    "education": "Education"
+  },
+
+  "footer": "Reach me out",
+
+  "home": {
+    "subTitle": "Introduction and Professional Career Journey.",
+    "call": "Call Me",
+    "experiences": "Experiences",
+    "bio": "Working within Vue Js & Laravel, transform ideas into digital realities that are <br /> easily accessible and inclusive for web users."
+  },
+
+  "project": {
+    "subTitle": "My Projects",
+    "projects": {
+      "description1": "TO DO project for the Super Bootcamp Sanbercode 2024 assignment.",
+      "description2": "Back End application for a Restful API themed E - Bengkel. It provides services for an admin to perform administrative tasks for their workshop.",
+      "description3": "This project is a task from the Sanbercode Bootcamp. It functions to display movie reviews."
+    }
+  },
+
+  "skills": {
+    "subTitle": "My Skills",
+    "skill": "Skills",
+    "frontend": {
+      "item1": "HTML & CSS: Crafting responsive, user-friendly web pages with modern, semantic markup.",
+      "item2": "JavaScript & TypeScript: Building dynamic and interactive user interfaces.",
+      "item3": "Frameworks: Proficient in Vue.js for creating efficient, maintainable, and scalable web applications."
+    },
+    "backend": {
+      "item1": "Laravel: Developing fast and scalable server-side applications.",
+      "item2": "Database Management: Skilled in SQL databases like MySQL."
+    },
+    "design": {
+      "title": "Design",
+      "item1": "Bootstrap: Utilizing Bootstrap for creating responsive, mobile-first web designs.",
+      "item2": "Tailwind CSS: Utilizing utility-first CSS framework for rapidly building custom designs."
+    },
+    "tools": {
+      "title": "Tools & Technologies",
+      "item1": "Version Control: Proficient with Git and GitHub for source code management and collaboration.",
+      "item2": "Build Tools: Experience with Webpack, Babel, and npm/yarn for efficient project management.",
+      "item3": "Testing: Writing and executing tests using frameworks like Jest and Cypress to ensure code quality."
+    },
+    "additional": {
+      "title": "Additional Skills",
+      "item1": "Problem-Solving: Strong analytical and problem-solving skills to tackle complex challenges effectively."
+    }
+  }
+}

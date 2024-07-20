@@ -1,9 +1,6 @@
 <template>
   <div>
-    <Title
-      title="Home"
-      subTitle="Introduction and Professional Career Journey."
-    ></Title>
+    <Title title="Home" :subTitle="t('home.subTitle')"></Title>
 
     <section class="wrapper">
       <div class="flex pl-2 lg:pl-0 gap-3 mb-12 md:hidden">
@@ -12,19 +9,19 @@
 
       <div class="border-bottom-1 break">
         <h1 class="text-3xl font-extrabold">
-          Call me
+          {{ t("home.call") }}
           <span
-            class="bg-gradient1 capitalize dark:text-transparent dark:bg-clip-text"
+            class="bg-gradient-to-r from-primary to-secondary dark:text-transparent dark:bg-clip-text capitalize"
             >{{ name }}</span
           >
         </h1>
         <p class="my-4 capitalize">{{ profession }}</p>
-        <p v-html="bio"></p>
+        <p v-html="t('home.bio')"></p>
       </div>
 
       <div class="break">
         <h1 class="text-lg font-bold my-4 mb-5">
-          <i class="pi pi-briefcase mr-3"></i> Experiences
+          <i class="pi pi-briefcase mr-3"></i> {{ t("home.experiences") }}
         </h1>
 
         <div class="flex flex-wrap gap-5 pb-4">
@@ -44,9 +41,19 @@ import Title from "../components/Title.vue";
 import Footer from "../components/Footer.vue";
 import Profile from "../components/Profile.vue";
 import Experience from "../components/Experiece.vue";
-import { useHomeStore } from "../store/home";
-import { storeToRefs } from "pinia";
+import { ref, reactive } from "vue";
+import { useI18n } from "vue-i18n";
 
-const homeStore = useHomeStore();
-const { name, profession, bio, ExperienceLists } = storeToRefs(homeStore);
+const { t } = useI18n();
+
+const name = ref("Aldy");
+const profession = ref("fullstack web developer");
+const ExperienceLists = reactive([
+  {
+    name: "Frontend Developer",
+    company: "PT. Sarana Pactindo",
+    location: "Bandung",
+    date: "October 2023 - May 2024",
+  },
+]);
 </script>

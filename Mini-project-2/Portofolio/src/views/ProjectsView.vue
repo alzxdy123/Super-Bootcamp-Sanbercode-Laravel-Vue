@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Title title="Projects" subTitle="My Project" />
+    <Title title="Projects" :subTitle="$t('project.subTitle')" />
 
     <section class="lg:ml-10 wrapper" style="max-width: 700px">
       <div

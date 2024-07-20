@@ -18,15 +18,29 @@ p {
   font-size: 18px;
 }
 
-/* [data-theme="dark"] * {
-  color: white;
-} */
-
-.active-link {
-  background: linear-gradient(to right, #b3ffab, #12fff7);
-  color: black;
+@layer base {
+  :root {
+    --color-primary: #000000;
+    --color-secondary: #ffffff;
+  }
 }
 
-.gradient1 {
-  background: linear-gradient(to right, #b3ffab, #12fff7);
+.theme-cyan {
+  --color-primary: #b3ffab;
+  --color-secondary: #12fff7;
+}
+
+.theme-orange {
+  --color-primary: rgb(248, 198, 105);
+  --color-secondary: rgb(255, 77, 77);
+}
+
+.theme-purple {
+  --color-primary: #e398fa;
+  --color-secondary: #8f00ff;
+}
+
+.theme-blue {
+  --color-primary: #40c9ff;
+  --color-secondary: #e81cff;
 }

@@ -2,7 +2,7 @@
   <div
     class="border border-slate-500 rounded-lg flex p-5 items-center justify-center gap-8 w-80 shadow-md shadow-gray-300"
   >
-    <img src="@/assets/images/pac-logo.jpg" alt="" width="55" />
+    <img src="@/assets/images/pac-logo.png" alt="" width="55" />
     <div>
       <h4 class="text-md mb-2 font-bold">{{ list.name }}</h4>
       <div class="text-sm mb-2">

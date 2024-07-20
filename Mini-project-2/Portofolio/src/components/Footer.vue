@@ -2,7 +2,7 @@
   <div
     class="flex flex-col justify-center items-center border-t border-slate-400 mb-10 pt-10"
   >
-    <h3 class="font-bold">Reach me out</h3>
+    <h3 class="font-bold">{{ t("footer") }}</h3>
     <div class="mt-2 flex items-center gap-1 h-10">
       <div class="p-1 rounded-lg cursor-pointer" v-for="list in lists">
         <a
@@ -35,4 +35,7 @@ const lists = ref([
     icon: "pi pi-telegram",
   },
 ]);
+
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 </script>

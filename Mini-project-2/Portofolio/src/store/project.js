@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 
-import htmlLogo from "@/assets/images/html-logo.jpg";
-import cssLogo from "@/assets/images/css-logo.jpg";
+import htmlLogo from "@/assets/images/html-logo.png";
+import cssLogo from "@/assets/images/css-logo.png";
 import jsLogo from "@/assets/images/javascript-logo.jpg";
-import vueLogo from "@/assets/images/vue-logo.jpg";
-import laravelLogo from "@/assets/images/laravel-logo.jpg";
+import vueLogo from "@/assets/images/vue-logo.png";
+import laravelLogo from "@/assets/images/laravel-logo.png";
 
 import project1 from "../assets/projects/project1.png";
 import project2 from "../assets/projects/project2.png";
@@ -13,11 +14,11 @@ import reviewFilm from "../assets/projects/review-film.png";
 import eBengkel from "../assets/projects/e-bengkel.png";
 
 export const useProjectStore = defineStore("project", () => {
+  const { t } = useI18n();
   const projects = ref([
     {
       title: "To Do",
-      description:
-        "TO DO project untuk tugas dari super bootcamp sanber code 2024.",
+      description: t("project.projects.description1"),
       img: project2,
       url: "https://github.com/alzxdy123/Super-Bootcamp-Sanbercode-Laravel-Vue/tree/main/Quiz%202",
       skill: [
@@ -37,8 +38,7 @@ export const useProjectStore = defineStore("project", () => {
     },
     {
       title: "BE E - Bengkel",
-      description:
-        "Aplikasi Back End untuk Restfull API bertemakan E - Bengkel. Yg menyediakan layanan untuk admin suatu bengkel melakukan kegiatan administari bengkelnya",
+      description: t("project.projects.description2"),
       img: eBengkel,
       url: "https://documenter.getpostman.com/view/32768863/2sA3kSp45U",
       skill: [
@@ -50,8 +50,7 @@ export const useProjectStore = defineStore("project", () => {
     },
     {
       title: "BE Review Film",
-      description:
-        "Project ini adalah hasil tugas dari Sanbercode Bootcamp. Yang berfungsi untuk menampilkan review film.",
+      description: t("project.projects.description3"),
       img: reviewFilm,
       url: "https://documenter.getpostman.com/view/32768863/2sA3XY5d4b",
       skill: [

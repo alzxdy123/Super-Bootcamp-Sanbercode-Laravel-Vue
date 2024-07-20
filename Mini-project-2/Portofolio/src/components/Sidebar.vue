@@ -6,41 +6,83 @@
       <RouterLink
         v-for="list in NavLists"
         :to="list.path"
-        class="flex justify-center lg:justify-start items-center gap-3 p-3 mb-5 rounded-md cursor-pointer hover:scale-110 hover:bg-slate-200 lg:w-auto lg:mr-auto hover:dark:bg-slate-950"
+        class="flex justify-center lg:justify-start items-center gap-3 p-3 mb-5 rounded-md cursor-pointer hover:scale-110 hover:bg-slate-200 lg:w-auto lg:mr-auto hover:dark:bg-slate-900"
         :class="{
-          'active-link': $route.path == list.path,
+          ' bg-gradient-to-r from-primary to-secondary dark:text-black text-white':
+            $route.path == list.path,
         }"
       >
         <i :class="list.icon + ' font-extrabold text-xl mb-1'"></i>
-        <h1 class="text-md font-bold hidden lg:block">{{ list.name }}</h1>
+        <h1 class="text-md font-bold hidden lg:block">
+          {{ list.name }}
+        </h1>
       </RouterLink>
     </div>
 
-    <!-- <div class="w-full">
-      <h1 class="font-bold my-4">Theme</h1>
+    <div class="w-full border-b border-slate-400 pb-7 pl-3 pt-5">
+      <div class="relative my-5 cursor-pointer" @click="toggleLanguageOptions">
+        <div>
+          <i class="pi pi-language text-xl mb-4 mr-4"></i>
+          <span class="text-md font-bold">{{ currentLanguage }}</span>
+          <i v-if="!showLanguageOptions" class="jam jam-chevron-up ml-5"></i>
+          <i v-else class="jam jam-chevron-down ml-5"></i>
+        </div>
+        <div
+          v-if="showLanguageOptions"
+          class="absolute right-0 bottom-full p-2 mt-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow-lg rounded-md"
+        >
+          <button
+            @click="changeLocale('en')"
+            class="text-sm font-bold p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"
+          >
+            English
+          </button>
+          <button
+            @click="changeLocale('id')"
+            class="text-sm font-bold p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"
+          >
+            Indonesia
+          </button>
+        </div>
+      </div>
+
       <div
-        class="w-full flex flex-wrap gap-3 justify-start border-b border-slate-400 pb-8"
+        class="w-full flex flex-wrap gap-3 md:justify-center lg:justify-start mt-3"
       >
         <button
-          @click="toggleDarkMode(false)"
-          class="text-sm font-bold p-3 rounded-md text-black bg-gradient1 dark:text-white dark:bg-none"
+          @click="setDarkTheme(false)"
+          class="text-sm font-bold p-3 rounded-md bg-gradient-to-r from-primary to-secondary dark:bg-none text-white"
         >
-          Light
+          {{ $t("sidebar.light") }}
         </button>
         <button
-          @click="toggleDarkMode(true)"
-          class="text-sm font-bold p-3 rounded-md dark dark:bg-gradient1 dark:text-black"
+          @click="setDarkTheme(true)"
+          class="text-sm font-bold p-3 rounded-md bg-gradient-to-r dark:from-primary dark:to-secondary dark:text-black"
         >
-          Dark
+          {{ $t("sidebar.dark") }}
         </button>
       </div>
-    </div> -->
+    </div>
+    <div class="flex w-full gap-2 mt-5">
+      <div
+        v-for="theme in themes"
+        :key="theme"
+        class="cursor-pointer w-5 h-5 rounded-full"
+        :class="theme.class"
+        @click="setTheme(theme.name)"
+      ></div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import Profile from "@/components/Profile.vue";
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, computed } from "vue";
+import { useThemeStore } from "../store/Theme";
+import { storeToRefs } from "pinia";
+import { useI18n } from "vue-i18n";
+
+const { t, locale } = useI18n();
 
 const NavLists = reactive([
   {
@@ -49,49 +91,49 @@ const NavLists = reactive([
     icon: " jam jam-home",
   },
   {
-    name: "About",
+    name: t("sidebar.about"),
     path: "/about",
     icon: " jam jam-user",
   },
   {
-    name: "Project",
+    name: t("sidebar.project"),
     path: "/project",
     icon: "jam jam-layout",
   },
   {
-    name: "Skill",
+    name: t("sidebar.skill"),
     path: "/skill",
     icon: "pi pi-code",
   },
 ]);
 
-const isDarkMode = ref(false);
-
-const toggleDarkMode = (params) => {
-  isDarkMode.value = params;
-  localStorage.setItem("darkMode", isDarkMode.value);
-  window.location.reload();
-
-  getTheme();
+const themeStore = useThemeStore();
+const setDarkTheme = (isDark) => {
+  themeStore.setDarkTheme(isDark);
 };
 
-const getTheme = () => {
-  let darkMode = localStorage.getItem("darkMode");
+const { themes } = storeToRefs(themeStore);
 
-  if (darkMode == "true") {
-    isDarkMode.value = true;
-    document.documentElement.classList.add("dark");
-  } else {
-    isDarkMode.value = false;
-    document.documentElement.classList.remove("dark");
-  }
+const setTheme = (theme) => {
+  themeStore.setTheme(theme);
 };
 
-onMounted(() => {
-  getTheme();
+const currentLanguage = computed(() => {
+  const languages = {
+    en: "English",
+    id: "Indonesia",
+  };
+  return languages[locale.value];
 });
-</script>
 
-<style>
-@import "../style.css";
-</style>
+const changeLocale = (newLocale) => {
+  locale.value = newLocale;
+  localStorage.setItem("locale", newLocale);
+  window.location.reload();
+};
+
+const showLanguageOptions = ref(false);
+const toggleLanguageOptions = () => {
+  showLanguageOptions.value = !showLanguageOptions.value;
+};
+</script>

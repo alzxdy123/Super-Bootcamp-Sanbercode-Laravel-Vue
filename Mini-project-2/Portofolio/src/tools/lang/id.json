@@ -1,0 +1,68 @@
+{
+  "test": "indonesia",
+
+  "sidebar": {
+    "about": "Tentang",
+    "project": "Proyek",
+    "skill": "Keterampilan",
+    "light": "Terang",
+    "dark": "Gelap"
+  },
+
+  "about": {
+    "title": "Tentang",
+    "subTitle": "Tentang Saya",
+    "text1": "Hai! Saya Aldy. Saya mulai belajar pengembangan web pada awal pandemi. Karena tidak banyak yang bisa dilakukan, saya memutuskan untuk memulai perjalanan pengembangan web saya melalui forum-forum pengembangan web. Setelah itu, saya mulai menonton berbagai video YouTube untuk mendalami pengembangan web, terutama dalam hal pengembangan frontend.",
+    "text2": "Saya sangat ingin memperluas pengetahuan dan keterampilan saya dalam pengembangan frontend, karena ada begitu banyak teknologi dan konsep yang bisa dieksplorasi. Saya merasa sangat puas dalam proses memperoleh informasi dan teknik baru, dan saya sangat termotivasi untuk terus belajar dan berkembang. Saya menghargai umpan balik yang konstruktif karena itu membantu saya memperbaiki kemampuan saya dan meningkatkan keahlian saya secara keseluruhan.",
+    "text3": "Melalui situs web ini, saya berencana untuk berbagi pemikiran dan memamerkan proyek-proyek yang telah saya kerjakan. Saya sangat percaya bahwa mendokumentasikan apa yang telah saya pelajari adalah metode yang sangat baik untuk memperkuat pemahaman saya, dan juga memungkinkan saya untuk berbagi pengetahuan saya dengan orang lain. Jangan ragu untuk menghubungi saya, dan saya akan senang membantu Anda!",
+    "address": "Saya Tinggal Di",
+    "education": "Pendidikan"
+  },
+
+  "footer": "Hubungi saya",
+
+  "home": {
+    "subTitle": "Pengenalan dan Perjalanan Karier Profesional.",
+    "call": "Perkenalkan Saya",
+    "experiences": "Pengalaman",
+    "bio": "Bekerja dengan Vue Js & Laravel, mengubah ide menjadi realitas digital yang <br /> mudah diakses dan inklusif untuk pengguna web."
+  },
+
+  "project": {
+    "subTitle": "Project Saya",
+    "projects": {
+      "description1": "TO DO project untuk tugas dari Super Bootcamp Sanbercode 2024.",
+      "description2": "Back End aplikasi untuk Restful API themed E - Bengkel. Melayani admin untuk melakukan tugas administratif untuk workshop mereka.",
+      "description3": "Proyek ini adalah tugas dari Sanbercode Bootcamp. Fungsi proyek ini untuk menampilkan tugas movie review."
+    }
+  },
+
+  "skills": {
+    "subTitle": "Keterampilan Saya",
+    "skill": "Keterampilan",
+    "frontend": {
+      "item1": "HTML & CSS: Membuat halaman web yang responsif dan ramah pengguna dengan markup modern dan semantik.",
+      "item2": "JavaScript & TypeScript: Membangun antarmuka pengguna yang dinamis dan interaktif.",
+      "item3": "Frameworks: Mahir dalam Vue.js untuk membuat aplikasi web yang efisien, mudah dipelihara, dan skalabel."
+    },
+    "backend": {
+      "item1": "Laravel: Mengembangkan aplikasi sisi server yang cepat dan skalabel.",
+      "item2": "Manajemen Database: Terampil dalam database SQL seperti MySQL."
+    },
+    "design": {
+      "title": "Desain",
+      "item1": "Bootstrap: Menggunakan Bootstrap untuk membuat desain web yang responsif dan mobile-first.",
+      "item2": "Tailwind CSS: Menggunakan framework CSS utilitas-pertama untuk dengan cepat membangun desain kustom."
+    },
+    "tools": {
+      "title": "Alat & Teknologi",
+      "item1": "Kontrol Versi: Terampil dengan Git dan GitHub untuk manajemen kode sumber dan kolaborasi.",
+      "item2": "Alat Bangun: Pengalaman dengan Webpack, Babel, dan npm/yarn untuk manajemen proyek yang efisien.",
+      "item3": "Pengujian: Menulis dan menjalankan tes menggunakan framework seperti Jest dan Cypress untuk memastikan kualitas kode."
+    },
+    "additional": {
+      "title": "Kemampuan Tambahan",
+      "item1": "Pemecahan Masalah: Keterampilan analitis dan pemecahan masalah yang kuat untuk menangani tantangan kompleks secara efektif."
+    }
+  }
+}
