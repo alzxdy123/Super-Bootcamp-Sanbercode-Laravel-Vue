@@ -112,6 +112,7 @@ const changeLocale = (newLocale) => {
   locale.value = newLocale;
   localStorage.setItem("locale", newLocale);
   showOptions.value = false;
+  window.location.reload();
 };
 
 const toggleDarkTheme = () => {
