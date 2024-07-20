@@ -129,7 +129,9 @@ const currentLanguage = computed(() => {
 const changeLocale = (newLocale) => {
   locale.value = newLocale;
   localStorage.setItem("locale", newLocale);
-  window.location.reload();
+  setTimeout(() => {
+    window.location.reload();
+  }, 1000);
 };
 
 const showLanguageOptions = ref(false);
