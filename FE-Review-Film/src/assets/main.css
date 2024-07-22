@@ -1,0 +1,39 @@
+@import "./base.css";
+
+.movie-bg {
+  background: url("../assets/images/bg-1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.bg-glass {
+  background: rgba(255, 255, 255, 0.21);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.6px);
+  -webkit-backdrop-filter: blur(7.6px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.active {
+  @apply bg-white;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.carousel-img {
+  height: 70vh;
+  object-fit: cover;
+  filter: brightness(40%);
+  -webkit-filter: brightness(40%);
+}
