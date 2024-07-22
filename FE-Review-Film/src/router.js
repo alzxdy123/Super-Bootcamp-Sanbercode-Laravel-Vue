@@ -13,9 +13,13 @@ const router = createRouter({
       name: "register",
       component: () => import("@/views/Auth/RegisterView.vue"),
     },
-
     {
       path: "/",
+      redirect: "/login", // Redirect root URL to /login
+    },
+
+    {
+      path: "/layout",
       name: "layout",
       component: () => import("@/views/LayoutView.vue"),
       children: [
