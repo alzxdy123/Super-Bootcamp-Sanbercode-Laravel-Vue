@@ -21,6 +21,8 @@ import laLaLandImage from "@/assets/images/lalaland.jpg";
 import jokerImage from "@/assets/images/joker.jpg";
 import parasiteImage from "@/assets/images/parasite.jpg";
 import blackPantherImage from "@/assets/images/panther.jpg";
+import Functions from "@/tools/Functions";
+import { onMounted } from "vue";
 
 const movies = [
   {
@@ -84,6 +86,15 @@ const movies = [
     genre: "Action",
   },
 ];
+
+// import { useUserStore } from "@/stores/user";
+
+// const userStore = useUserStore();
+
+// onMounted(() => {
+//   let user = userStore.currentUser;
+//   console.log("🚀 ~ onMounted ~ user:", user);
+// });
 </script>
 
 <style scoped></style>

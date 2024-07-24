@@ -23,7 +23,7 @@
             <li class="hover:text-yellow-400">
               <RouterLink to="/genre">Genre</RouterLink>
             </li>
-            <li class="hover:text-yellow-400">
+            <li class="hover:text-yellow-400" v-if="!isVerified">
               <RouterLink to="/verifikasi">Verifikasi</RouterLink>
             </li>
           </ul>
@@ -50,6 +50,10 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import { Icon } from "@iconify/vue";
+import { useUserStore } from "@/stores/user";
+
+const userStore = useUserStore();
+const { isVerified } = userStore;
 </script>
 
 <style scoped>

@@ -1,11 +1,38 @@
 <script setup>
-import { ref } from "vue";
+import AuthService from "@/services/AuthService";
+import Functions from "@/tools/Functions";
+import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/user";
 
 const isMenuOpen = ref(false);
+const username = ref("User");
+const router = useRouter();
+const userStore = useUserStore();
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
+
+const HandleLogout = () => {
+  AuthService.Logout()
+    .then((res) => {
+      console.log(res);
+      Functions.RemoveSessionCustom("token");
+      Functions.RemoveSessionCustom("user");
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+onMounted(() => {
+  let user = userStore.currentUser;
+  if (user) {
+    username.value = user.name;
+  }
+});
 </script>
 
 <template>
@@ -44,19 +71,44 @@ const toggleMenu = () => {
           >
             Genre
           </RouterLink>
-          <RouterLink
-            to="/verifikasi"
-            class="mx-1 rounded-lg cursor-pointer px-5 py-1 hover:bg-white"
-          >
-            Verifikasi
-          </RouterLink>
-          <RouterLink
-            to="/login"
-            class="mx-1 rounded-lg cursor-pointer px-5 py-1 hover:bg-white flex items-center"
-          >
-            <Icon icon="mdi:power" class="mr-1 text-red-600"></Icon>
-            Logout
-          </RouterLink>
+          <div class="relative">
+            <div
+              class="mx-1 rounded-lg cursor-pointer px-5 py-1 hover:bg-white flex items-center"
+              @click="isMenuOpen = !isMenuOpen"
+            >
+              <Icon icon="mdi:account" class="mr-1"></Icon>
+              {{ username }}
+              <Icon icon="mdi:chevron-down" class="ml-1"></Icon>
+            </div>
+            <div
+              v-if="isMenuOpen"
+              class="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-48 z-50"
+            >
+              <RouterLink
+                to="/verifikasi"
+                class="block px-4 py-2 hover:bg-gray-200"
+                @click="isMenuOpen = false"
+                v-if="!userStore.isVerified"
+              >
+                Verifikasi
+              </RouterLink>
+              <RouterLink
+                to="/profile"
+                class="block px-4 py-2 hover:bg-gray-200"
+                @click="isMenuOpen = false"
+                v-else
+              >
+                Profile
+              </RouterLink>
+              <div
+                @click="HandleLogout"
+                class="block px-4 py-2 cursor-pointer hover:bg-gray-200 flex items-center"
+              >
+                <Icon icon="mdi:power" class="mr-1 text-red-600"></Icon>
+                Logout
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="md:hidden">
@@ -83,7 +135,7 @@ const toggleMenu = () => {
         </div>
       </div>
     </div>
-    <div v-show="isMenuOpen" class="md:hidden mt-2">
+    <div v-show="isMenuOpen" class="md:hidden mt-2 z-50">
       <div class="menu menu-vertical px-1">
         <RouterLink
           to="/dashboard"
@@ -113,20 +165,37 @@ const toggleMenu = () => {
         >
           Genre
         </RouterLink>
+
         <RouterLink
           to="/verifikasi"
           class="mx-1 rounded-lg cursor-pointer px-5 py-1 hover:bg-white"
+          @click="isMenuOpen = false"
+          v-if="!userStore.isVerified"
         >
           Verifikasi
         </RouterLink>
         <RouterLink
-          to="/login"
-          class="mx-1 rounded-lg cursor-pointer px-5 py-1 hover:bg-white flex items-center"
+          to="/profile"
+          class="mx-1 rounded-lg cursor-pointer px-5 py-1 hover:bg-white"
+          @click="isMenuOpen = false"
+          v-else
+        >
+          Profile
+        </RouterLink>
+        <div
+          @click="HandleLogout"
+          class="block px-4 py-2 cursor-pointer hover:bg-gray-200 flex items-center"
         >
           <Icon icon="mdi:power" class="mr-1 text-red-600"></Icon>
           Logout
-        </RouterLink>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.z-50 {
+  z-index: 50;
+}
+</style>
