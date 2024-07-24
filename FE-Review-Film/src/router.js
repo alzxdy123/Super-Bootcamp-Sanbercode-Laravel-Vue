@@ -6,13 +6,13 @@ const routes = [
     path: "/login",
     name: "login",
     component: () => import("@/views/Auth/LoginView.vue"),
-    meta: { requiresAuth: false },
+    meta: { notLogin: true },
   },
   {
     path: "/register",
     name: "register",
     component: () => import("@/views/Auth/RegisterView.vue"),
-    meta: { requiresAuth: false },
+    meta: { notLogin: true },
   },
   {
     path: "/",
@@ -24,25 +24,25 @@ const routes = [
         path: "/dashboard",
         name: "dashboard",
         component: () => import("@/views/DashboardView.vue"),
-        meta: { requiresAuth: true },
+        // meta: { requiresAuth: true },
       },
       {
         path: "/film",
         name: "film",
         component: () => import("@/views/FilmView.vue"),
-        meta: { requiresAuth: true },
+        // meta: { requiresAuth: true },
       },
       {
         path: "/cast",
         name: "cast",
         component: () => import("@/views/CastView.vue"),
-        meta: { requiresAuth: true },
+        // meta: { requiresAuth: true },
       },
       {
         path: "/genre",
         name: "genre",
         component: () => import("@/views/GenreView.vue"),
-        meta: { requiresAuth: true },
+        // meta: { requiresAuth: true },
       },
       {
         path: "/verifikasi",
@@ -50,11 +50,16 @@ const routes = [
         component: () => import("@/views/Auth/VerificationView.vue"),
         meta: {
           isVerified: true,
-          requiresAuth: true,
         },
       },
+      {
+        path: "/profile",
+        name: "profile",
+        component: () => import("@/views/ProfileView.vue"),
+        meta: { requiresAuth: true, notVerified: true },
+      },
     ],
-    meta: { requiresAuth: true },
+    // meta: { requiresAuth: true },
   },
 ];
 
@@ -66,9 +71,13 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem("token");
 
+  if (to.meta.notLogin && token) {
+    return next({ path: "/dashboard" });
+  }
+
   if (to.meta.requiresAuth && !token) {
     return next({
-      path: "/login",
+      path: "/dashboard",
       query: { returnUrl: to.fullPath },
     });
   }
@@ -83,7 +92,17 @@ router.beforeEach((to, from, next) => {
     return next({ path: "/dashboard" });
   }
 
+  if (to.meta.notVerified && isVerified == false) {
+    return next({ path: "/verifikasi" });
+  }
+
   next();
 });
 
 export default router;
+
+// {
+//   path: "/:pathMatch(.*)*",
+//   name: "notfound",
+//   component: () => import("@/views/NotFoundView.vue"),
+// },

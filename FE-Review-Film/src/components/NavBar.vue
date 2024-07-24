@@ -20,12 +20,15 @@ const HandleLogout = () => {
       console.log(res);
       Functions.RemoveSessionCustom("token");
       Functions.RemoveSessionCustom("user");
+      alert("Logout Successfull");
       window.location.reload();
     })
     .catch((err) => {
       console.log(err);
     });
 };
+
+const token = localStorage.getItem("token");
 
 onMounted(() => {
   let user = userStore.currentUser;
@@ -71,7 +74,7 @@ onMounted(() => {
           >
             Genre
           </RouterLink>
-          <div class="relative">
+          <div class="relative" v-if="token">
             <div
               class="mx-1 rounded-lg cursor-pointer px-5 py-1 hover:bg-white flex items-center"
               @click="isMenuOpen = !isMenuOpen"
@@ -109,6 +112,13 @@ onMounted(() => {
               </div>
             </div>
           </div>
+          <RouterLink
+            to="/login"
+            class="mx-1 rounded-lg cursor-pointer px-5 py-1 hover:bg-white"
+            v-else
+          >
+            Login
+          </RouterLink>
         </div>
       </div>
       <div class="md:hidden">

@@ -39,6 +39,12 @@
           >
         </p>
       </div>
+      <div class="absolute bottom-[-40px]">
+        <p class="text-white text-sm mt-3 text-center">
+          Back To
+          <RouterLink class="text-yellow-400" to="/">Home</RouterLink>
+        </p>
+      </div>
     </div>
   </div>
 </template>

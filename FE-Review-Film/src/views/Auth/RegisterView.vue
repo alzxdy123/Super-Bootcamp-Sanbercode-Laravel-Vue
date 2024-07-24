@@ -67,12 +67,10 @@
           <RouterLink class="text-yellow-400" to="/login">Login</RouterLink>
         </p>
       </div>
-      <div class="absolute bottom-10 md:bottom-[-40px] w-full left-0">
-        <p class="text-white text-sm text-center">
-          Go To
-          <RouterLink class="text-yellow-400 underline" to="/verifikasi"
-            >Verifikasi</RouterLink
-          >
+      <div class="absolute bottom-[-40px]">
+        <p class="text-white text-sm mt-3 text-center">
+          Back To
+          <RouterLink class="text-yellow-400" to="/">Home</RouterLink>
         </p>
       </div>
     </div>
