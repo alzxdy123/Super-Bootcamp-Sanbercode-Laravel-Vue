@@ -25,7 +25,7 @@
         </div>
         <button
           type="submit"
-          class="py-2 rounded-md text-md bg-yellow-400 w-full mt-5"
+          class="py-2 rounded-md text-md bg-yellow-400 w-full mt-5 flex justify-center items-center"
         >
           <Icon v-if="isBusy" icon="svg-spinners:180-ring-with-bg" />
           <span v-else>Login</span>

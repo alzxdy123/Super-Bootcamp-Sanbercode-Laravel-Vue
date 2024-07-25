@@ -69,7 +69,6 @@ const GetUser = () => {
       if (data.profile !== null) {
         isBusy.value = false;
         profile.value = data.profile;
-        console.log("🚀 ~ .then ~ profile:", profile);
         createProfileForm.value = false;
       } else {
         createProfileForm.value = true;

@@ -9,18 +9,19 @@ const isMenuOpen = ref(false);
 const username = ref("User");
 const router = useRouter();
 const userStore = useUserStore();
+const isBusy = ref(false);
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
 
 const HandleLogout = () => {
+  isBusy.value = true;
   AuthService.Logout()
     .then((res) => {
-      console.log(res);
+      isBusy.value = false;
       Functions.RemoveSessionCustom("token");
       Functions.RemoveSessionCustom("user");
-      alert("Logout Successfull");
       window.location.reload();
     })
     .catch((err) => {
@@ -70,7 +71,9 @@ onMounted(() => {
           <RouterLink
             to="/genre"
             class="mx-1 rounded-lg cursor-pointer px-5 py-1 hover:bg-white"
-            :class="{ active: $route.path == '/genre' }"
+            :class="{
+              active: $route.path == '/genre' || $route.name == 'genreDetail',
+            }"
           >
             Genre
           </RouterLink>
@@ -107,7 +110,12 @@ onMounted(() => {
                 @click="HandleLogout"
                 class="block px-4 py-2 cursor-pointer hover:bg-gray-200 flex items-center"
               >
-                <Icon icon="mdi:power" class="mr-1 text-red-600"></Icon>
+                <Icon
+                  v-if="isBusy"
+                  icon="svg-spinners:180-ring-with-bg"
+                  class="mr-1"
+                />
+                <Icon v-else icon="mdi:power" class="mr-1 text-red-600"></Icon>
                 Logout
               </div>
             </div>
@@ -196,7 +204,12 @@ onMounted(() => {
           @click="HandleLogout"
           class="block px-4 py-2 cursor-pointer hover:bg-gray-200 flex items-center"
         >
-          <Icon icon="mdi:power" class="mr-1 text-red-600"></Icon>
+          <Icon
+            v-if="isBusy"
+            icon="svg-spinners:180-ring-with-bg"
+            class="mr-1"
+          />
+          <Icon v-else icon="mdi:power" class="mr-1 text-red-600"></Icon>
           Logout
         </div>
       </div>

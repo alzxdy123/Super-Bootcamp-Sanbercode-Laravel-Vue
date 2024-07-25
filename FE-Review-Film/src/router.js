@@ -24,25 +24,26 @@ const routes = [
         path: "/dashboard",
         name: "dashboard",
         component: () => import("@/views/DashboardView.vue"),
-        // meta: { requiresAuth: true },
       },
       {
         path: "/film",
         name: "film",
         component: () => import("@/views/FilmView.vue"),
-        // meta: { requiresAuth: true },
       },
       {
         path: "/cast",
         name: "cast",
         component: () => import("@/views/CastView.vue"),
-        // meta: { requiresAuth: true },
       },
       {
         path: "/genre",
         name: "genre",
         component: () => import("@/views/GenreView.vue"),
-        // meta: { requiresAuth: true },
+      },
+      {
+        path: "/genre/:id",
+        name: "genreDetail",
+        component: () => import("@/views/GenreDetailView.vue"),
       },
       {
         path: "/verifikasi",
@@ -59,7 +60,6 @@ const routes = [
         meta: { requiresAuth: true, notVerified: true },
       },
     ],
-    // meta: { requiresAuth: true },
   },
 ];
 
