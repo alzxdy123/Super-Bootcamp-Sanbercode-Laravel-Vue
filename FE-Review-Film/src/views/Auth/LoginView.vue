@@ -64,8 +64,8 @@ const isBusy = ref(false);
 const errMessage = reactive([]);
 
 const formData = reactive({
-  email: "user2@gmail.com",
-  password: "123456",
+  email: "aldy@gmail.com",
+  password: "admin",
 });
 
 const HandleLogin = () => {

@@ -1,8 +1,6 @@
 <template>
   <div class="flex flex-col min-h-screen">
-    <header>
-      <NavBar />
-    </header>
+    <NavBar />
     <main class="flex-grow">
       <RouterView v-slot="{ Component, route }">
         <Transition name="fade">

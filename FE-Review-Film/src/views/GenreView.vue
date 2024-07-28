@@ -7,9 +7,13 @@
       title="Edit Genre"
       :genre="selectedItem"
     />
-    <div v-else>
+    <div v-else class="w-full flex flex-wrap justify-center flex-col">
       <div class="flex justify-center mt-10">
-        <button class="btn bg-yellow-400" @click="genreForm = true">
+        <button
+          v-if="isAdmin"
+          class="btn bg-yellow-400"
+          @click="genreForm = true"
+        >
           Tambah
         </button>
       </div>
@@ -23,10 +27,11 @@
           v-else
           v-for="(genre, index) in genres"
           :key="genre.id"
+          @click="handleDetail(genre.id)"
           class="bg-white border border-gray-300 rounded-lg shadow-md p-4 m-2 max-w-xs text-center cursor-pointer"
         >
           <h3 class="text-lg font-bold">{{ genre.name }}</h3>
-          <div class="flex gap-2 mt-5">
+          <div class="flex gap-2 mt-5" v-if="isAdmin">
             <div
               @click="handleDetail(genre.id)"
               class="bg-yellow-400 px-2 py-1 rounded-md shadow-md"
@@ -108,7 +113,11 @@ const handleDelete = (id) => {
     });
 };
 
+const isAdmin = ref(false);
+
 onMounted(() => {
+  let admin = Functions.ReadSessionCustom("isAdmin");
+  isAdmin.value = admin;
   getGenre();
 });
 </script>

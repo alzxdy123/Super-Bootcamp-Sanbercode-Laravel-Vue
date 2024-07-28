@@ -31,9 +31,24 @@ const routes = [
         component: () => import("@/views/FilmView.vue"),
       },
       {
+        path: "/film/:id",
+        name: "filmDetail",
+        component: () => import("@/views/FilmDetailView.vue"),
+      },
+      {
+        path: "/film/edit/:id",
+        name: "filmEdit",
+        component: () => import("@/views/MovieEditView.vue"),
+      },
+      {
         path: "/cast",
         name: "cast",
         component: () => import("@/views/CastView.vue"),
+      },
+      {
+        path: "/cast/:id",
+        name: "castDetail",
+        component: () => import("@/views/CastDetailView.vue"),
       },
       {
         path: "/genre",

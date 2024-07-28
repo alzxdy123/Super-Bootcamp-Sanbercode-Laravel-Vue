@@ -17,11 +17,13 @@ const toggleMenu = () => {
 
 const HandleLogout = () => {
   isBusy.value = true;
+  localStorage.clear();
+  Functions.RemoveSessionCustom("token");
+  Functions.RemoveSessionCustom("user");
+
   AuthService.Logout()
     .then((res) => {
       isBusy.value = false;
-      Functions.RemoveSessionCustom("token");
-      Functions.RemoveSessionCustom("user");
       window.location.reload();
     })
     .catch((err) => {
@@ -64,7 +66,9 @@ onMounted(() => {
           <RouterLink
             to="/cast"
             class="mx-1 rounded-lg cursor-pointer px-5 py-1 hover:bg-white"
-            :class="{ active: $route.path == '/cast' }"
+            :class="{
+              active: $route.path == '/cast' || $route.name == 'castDetail',
+            }"
           >
             Cast
           </RouterLink>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\CastMovie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MovieRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,28 +29,54 @@ class MovieController extends Controller
      */
     public function store(MovieRequest $request)
     {
-        $movie = $request->validated();
-
-        if ($request->hasFile('poster')) {
-            $posterName = time().'.'.$request->poster->extension();
-            $request->poster->storeAs('public/images', $posterName);
-            $poster = env('APP_URL').'/storage/images/'.$posterName;
-            $movie['poster'] = $poster;
+        DB::beginTransaction();
+    
+        try {
+            $movieData = $request->validated();
+    
+            if ($request->hasFile('poster')) {
+                $posterName = time().'.'.$request->poster->extension();
+                $request->poster->storeAs('public/images', $posterName);
+                $poster = env('APP_URL').'/storage/images/'.$posterName;
+                $movieData['poster'] = $poster;
+            }
+    
+            // Create movie entry
+            $movie = Movie::create($movieData);
+    
+            // Create entries in cast_movie table
+            $castIds = $request->input('cast_ids', []);
+            $roles = $request->input('roles', []);
+            foreach ($castIds as $castId) {
+                CastMovie::create([
+                    'movie_id' => $movie->id,
+                    'cast_id' => $castId,
+                    'name' => $roles[$castId] ?? '' 
+                ]);
+            }
+    
+            DB::commit();
+    
+            return response()->json([
+                'message' => 'Movie berhasil ditambahkan',
+                'data' => $movie // Optional: return data movie yang baru dibuat
+            ], 201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error adding movie',
+                'error' => $e->getMessage()
+            ], 500);
         }
-        
-        Movie::create($movie);
-
-        return response()->json([
-            'message' => 'Movie berhasil ditambahkan',
-        ], 201);
     }
+    
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        $movie = Movie::with('genre:id,name', 'listCast:id,name,cast_id')->find($id);
+        $movie = Movie::with('genre:id,name', 'listCast:id,name,movie_id')->find($id);
 
         if(!$movie) {
             return response()->json([

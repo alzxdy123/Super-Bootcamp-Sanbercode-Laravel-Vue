@@ -27,6 +27,8 @@ class MovieRequest extends FormRequest
             'year' => 'required|date',
             'poster' => 'mimes:jpg,bmp,png',
             'genre_id' => 'required',
+            'cast_ids' => 'array',
+            'cast_ids.*' => 'uuid|exists:casts,id'
         ];
     }
 

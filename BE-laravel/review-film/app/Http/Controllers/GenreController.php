@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GenreRequest;
 use App\Models\Genre;
+use App\Models\Movie;
 use Illuminate\Http\Request;
 
 class GenreController extends Controller

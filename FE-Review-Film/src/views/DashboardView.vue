@@ -26,75 +26,78 @@ import { onMounted } from "vue";
 
 const movies = [
   {
-    image: avengerImage,
+    poster: avengerImage,
     title: "Avenger",
     year: "2012",
     genre: "Action",
   },
   {
-    image: insideOutImage,
+    poster: insideOutImage,
     title: "Inside Out",
     year: "2015",
     genre: "Animation",
   },
   {
-    image: interstellarImage,
+    poster: interstellarImage,
     title: "Interstellar",
     year: "2014",
     genre: "Sci-Fi",
   },
   {
-    image: darkKnightImage,
+    poster: darkKnightImage,
     title: "Dark Knight",
     year: "2008",
     genre: "Action",
   },
   {
-    image: inceptionImage,
+    poster: inceptionImage,
     title: "Inception",
     year: "2010",
     genre: "Sci-Fi",
   },
   {
-    image: frozenImage,
+    poster: frozenImage,
     title: "Frozen",
     year: "2013",
     genre: "Animation",
   },
   {
-    image: laLaLandImage,
+    poster: laLaLandImage,
     title: "La La Land",
     year: "2016",
     genre: "Drama",
   },
   {
-    image: jokerImage,
+    poster: jokerImage,
     title: "Joker",
     year: "2019",
     genre: "Thriller",
   },
   {
-    image: parasiteImage,
+    poster: parasiteImage,
     title: "Parasite",
     year: "2019",
     genre: "Thriller",
   },
   {
-    image: blackPantherImage,
+    poster: blackPantherImage,
     title: "Black Panther",
     year: "2018",
     genre: "Action",
   },
 ];
 
-// import { useUserStore } from "@/stores/user";
+import { useUserStore } from "@/stores/user";
 
-// const userStore = useUserStore();
+const userStore = useUserStore();
 
-// onMounted(() => {
-//   let user = userStore.currentUser;
-//   console.log("🚀 ~ onMounted ~ user:", user);
-// });
+const admin = Functions.ReadSessionCustom("isAdmin");
+console.log("🚀 ~ admin:", admin);
+
+onMounted(() => {
+  let isAdmin = userStore.isAdmin;
+  console.log("🚀 ~ onMounted ~ isAdmin:", isAdmin);
+});
 </script>
 
 <style scoped></style>

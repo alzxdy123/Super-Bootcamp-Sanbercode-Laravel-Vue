@@ -43,7 +43,11 @@ class CastController extends Controller
      */
     public function show(string $id)
     {
-        $cast = Cast::with('listMovie:id,name,movie_id,cast_id')->find($id);
+        // $cast = Cast::with('listMovie:id,name,movie_id,cast_id')->find($id);
+
+        $cast = Cast::with(['listMovie' => function($query) {
+            $query->with('movie:id,title,poster,year,summary,genre_id');
+        }])->find($id);
 
         if(!$cast) {
             return response()->json([
