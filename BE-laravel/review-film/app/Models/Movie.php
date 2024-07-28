@@ -27,4 +27,8 @@ class Movie extends Model
     public function listCast() {
         return $this->hasMany(CastMovie::class, 'movie_id');
     }
+
+    public function review() {
+        return $this->hasMany(Review::class, 'movie_id');
+    }
 }

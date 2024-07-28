@@ -9,10 +9,6 @@
         alt="movie.title"
         class="w-full h-40 object-cover"
       />
-      <!-- <span
-        class="absolute top-0 left-0 bg-yellow-400 text-white text-xs font-bold px-2 py-1 rounded-br-lg"
-        >{{ movie.genre.name }}</span
-      > -->
     </div>
     <div class="p-4">
       <h3 class="text-lg font-semibold">{{ movie.title }}</h3>
@@ -21,19 +17,19 @@
 
     <div class="flex gap-2 m-5" v-if="isAdmin">
       <div
-        @click="handleDetail(movie.id)"
+        @click.stop="handleDetail(movie.id)"
         class="bg-yellow-400 px-2 py-1 rounded-md shadow-md"
       >
         Detail
       </div>
       <div
-        @click="handleEdit(movie.id)"
+        @click.stop="handleEdit(movie.id)"
         class="bg-blue-800 px-2 py-1 rounded-md shadow-md text-white"
       >
         Edit
       </div>
       <div
-        @click="handleDelete(movie.id)"
+        @click.stop="handleDelete(movie.id)"
         class="bg-red-500 px-2 py-1 rounded-md shadow-md text-white"
       >
         Hapus
@@ -43,7 +39,7 @@
 </template>
 
 <script setup>
-import router from "@/router";
+import { useRouter } from "vue-router";
 import MovieService from "@/services/MovieService";
 import Functions from "@/tools/Functions";
 
@@ -54,13 +50,15 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(["refresh"]);
+
+const router = useRouter();
+
 const isAdmin = Functions.ReadSessionCustom("isAdmin");
 
-const handleDetail = () => {
-  const id = props.movie.id;
-
+const handleDetail = (id) => {
   MovieService.Detail(id)
-    .then((res) => {
+    .then(() => {
       router.push("/film/" + id);
     })
     .catch((err) => {
@@ -70,6 +68,16 @@ const handleDetail = () => {
 
 const handleEdit = (id) => {
   router.push("/film/edit/" + id);
+};
+
+const handleDelete = (id) => {
+  MovieService.Delete(id)
+    .then(() => {
+      emit("refresh");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 </script>
 

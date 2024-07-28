@@ -51,7 +51,7 @@ class AuthController extends Controller
     {
         $user = auth()->user();
 
-        $currentUser = User::with('profile')->find($user->id);
+        $currentUser = User::with('profile', 'review')->find($user->id);
 
         return response()->json([
             'data' => $currentUser]);

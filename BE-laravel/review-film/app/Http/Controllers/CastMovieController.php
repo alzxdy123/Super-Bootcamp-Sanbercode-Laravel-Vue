@@ -16,10 +16,17 @@ class CastMovieController extends Controller
      */
     public function index()
     {
-        $castMovie = CastMovie::all();
-
+        $castMovies = CastMovie::with([
+            'movie' => function($query) {
+                $query->select('id', 'title');
+            },
+            'cast' => function($query) {
+                $query->select('id', 'name');
+            }
+        ])->get();
+    
         return response()->json([
-            'data' => $castMovie
+            'data' => $castMovies
         ]);
     }
 
@@ -44,14 +51,30 @@ class CastMovieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        $castMovie = CastMovie::with('movie', 'cast')->findOrFail($id);
+    // public function show(string $id)
+    // {
+    //     $castMovie = CastMovie::with('movie', 'cast')->findOrFail($id);
 
-        return response()->json([
-            'data' => $castMovie
-        ]);
-    }
+    //     return response()->json([
+    //         'data' => $castMovie
+    //     ]);
+    // }
+
+    public function show(string $id)
+{
+    $castMovie = CastMovie::with([
+        'movie' => function($query) {
+            $query->select('id', 'title', 'poster', 'year', 'summary', 'genre_id');
+        },
+        'cast' => function($query) {
+            $query->select('id', 'name');
+        }
+    ])->findOrFail($id);
+
+    return response()->json([
+        'data' => $castMovie
+    ]);
+}
 
     /**
      * Update the specified resource in storage.

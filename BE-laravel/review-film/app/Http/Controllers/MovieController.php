@@ -76,7 +76,11 @@ class MovieController extends Controller
      */
     public function show(string $id)
     {
-        $movie = Movie::with('genre:id,name', 'listCast:id,name,movie_id')->find($id);
+        $movie = Movie::with(['genre:id,name', 'listCast:id,name,movie_id', 'review' => function($query) {
+            $query->select('id', 'critic', 'rating', 'movie_id', 'user_id')
+                  ->with('user:id,name,email');
+        }])->find($id);
+
 
         if(!$movie) {
             return response()->json([

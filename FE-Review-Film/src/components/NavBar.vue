@@ -17,12 +17,12 @@ const toggleMenu = () => {
 
 const HandleLogout = () => {
   isBusy.value = true;
-  localStorage.clear();
-  Functions.RemoveSessionCustom("token");
-  Functions.RemoveSessionCustom("user");
 
   AuthService.Logout()
     .then((res) => {
+      localStorage.clear();
+      Functions.RemoveSessionCustom("token");
+      Functions.RemoveSessionCustom("user");
       isBusy.value = false;
       window.location.reload();
     })
@@ -71,6 +71,17 @@ onMounted(() => {
             }"
           >
             Cast
+          </RouterLink>
+          <RouterLink
+            to="/cast-movie"
+            class="mx-1 rounded-lg cursor-pointer px-5 py-1 hover:bg-white"
+            :class="{
+              active:
+                $route.path == '/cast-movie' ||
+                $route.name == 'castMovieDetail',
+            }"
+          >
+            Cast Movie
           </RouterLink>
           <RouterLink
             to="/genre"
@@ -179,6 +190,16 @@ onMounted(() => {
           :class="{ active: $route.path == '/cast' }"
         >
           Cast
+        </RouterLink>
+        <RouterLink
+          to="/cast-movie"
+          class="mx-1 rounded-lg cursor-pointer px-5 py-1 hover:bg-white"
+          :class="{
+            active:
+              $route.path == '/cast-movie' || $route.name == 'castMovieDetail',
+          }"
+        >
+          Cast Movie
         </RouterLink>
         <RouterLink
           to="/genre"

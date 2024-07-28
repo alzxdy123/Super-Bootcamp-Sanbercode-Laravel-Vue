@@ -14,10 +14,7 @@ export const useUserStore = defineStore("user", () => {
   function setCurrentUser(user) {
     currentUser.value = user;
 
-    if (
-      (user.role_id =
-        "$2y$10$fhLKVMRfS5TBeVE6l4zD5e7xMf.UX54cSoPBFvQhRzTW2.1lXHOAW")
-    ) {
+    if (user.role_id == "9c63724b-4f2e-482b-9fc2-350c0f68a4a5") {
       isAdmin.value = true;
       Functions.SaveSessionCustom("isAdmin", true);
     } else {

@@ -51,6 +51,16 @@ const routes = [
         component: () => import("@/views/CastDetailView.vue"),
       },
       {
+        path: "/cast-movie",
+        name: "castMovie",
+        component: () => import("@/views/MovieCast/MovieCastView.vue"),
+      },
+      {
+        path: "/cast-movie/:id",
+        name: "MovieCastDetail",
+        component: () => import("@/views/MovieCast/MovieCastDetailView.vue"),
+      },
+      {
         path: "/genre",
         name: "genre",
         component: () => import("@/views/GenreView.vue"),

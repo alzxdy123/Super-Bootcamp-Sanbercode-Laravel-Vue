@@ -78,6 +78,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(Profile::class, 'user_id');
     }
     
+    public function review() {
+        return $this->hasOne(Review::class, 'user_id');
+    }
+    
 
     public function otp_code() {
         return $this->hasOne(Otps::class, 'user_id');

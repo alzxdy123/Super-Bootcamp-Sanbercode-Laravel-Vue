@@ -12,4 +12,9 @@ class Review extends Model
 
     protected $table = 'reviews';
     protected $fillable = ['critic', 'rating', 'movie_id', 'user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
