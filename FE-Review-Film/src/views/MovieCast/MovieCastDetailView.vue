@@ -9,7 +9,7 @@
       </div>
       <div class="pl-10 w-full flex flex-col">
         <div>
-          <p class="text-xl font-bold">Play in</p>
+          <p class="text-xl font-bold">Movie</p>
           <div class="mt-2 flex gap-5 flex-col md:flex-row">
             <div class="w-1/3">
               <img
@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="mt-10">
-          <p class="text-xl font-bold">Play As</p>
+          <p class="text-xl font-bold">Cast</p>
           <p>{{ data.cast.name }}</p>
         </div>
       </div>

@@ -65,7 +65,9 @@
     </div>
   </div>
   <div class="w-full flex justify-center my-20 gap-5" v-if="!reviewForm">
-    <div @click="handleReview(movie.id)" class="btn bg-yellow-400">Review</div>
+    <div @click="handleReview(movie.id)" class="btn bg-yellow-400" v-if="token">
+      Review
+    </div>
     <div @click="$router.go(-1)" class="btn bg-red-500">Back</div>
   </div>
 </template>
@@ -77,6 +79,8 @@ import { useRoute } from "vue-router";
 import { onMounted, ref } from "vue";
 
 const route = useRoute();
+
+const token = localStorage.getItem("token");
 
 const movie = ref(null);
 const isBusy = ref(false);

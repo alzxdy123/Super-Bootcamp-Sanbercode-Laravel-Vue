@@ -27,7 +27,7 @@
           v-else
           v-for="(genre, index) in genres"
           :key="genre.id"
-          @click="handleDetail(genre.id)"
+          @click="!isAdmin ? handleDetail(genre.id) : ''"
           class="bg-white border border-gray-300 rounded-lg shadow-md p-4 m-2 max-w-xs text-center cursor-pointer"
         >
           <h3 class="text-lg font-bold">{{ genre.name }}</h3>

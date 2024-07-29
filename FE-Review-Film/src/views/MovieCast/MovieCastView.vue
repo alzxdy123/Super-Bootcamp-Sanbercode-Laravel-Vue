@@ -30,10 +30,11 @@
       v-else
       v-for="data in castMovies"
       :key="data"
-      class="p-5 border border-slate-400 shadow-md rounded-md"
+      class="p-5 border border-slate-400 shadow-md rounded-md cursor-pointer"
+      @click="!isAdmin ? handleDetail(data.id) : ''"
     >
       <h1 class="text-2xl font-bold">{{ data.name }}</h1>
-      <p>Play in {{ data.movie.title }}</p>
+      <p>Play in {{ data.movie.title }} By {{ data.cast.name }}</p>
       <div class="flex gap-2 mt-5" v-if="isAdmin">
         <div
           @click="handleDetail(data.id)"

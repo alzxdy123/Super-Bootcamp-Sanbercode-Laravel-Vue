@@ -1,13 +1,13 @@
 <template>
   <div>
     <Carousel />
-    <div class="flex gap-4 flex-wrap my-20 justify-center">
+    <div class="flex gap-4 flex-wrap mt-32 mb-20 justify-center">
       <icon
         icon="svg-spinners:180-ring-with-bg"
         class="text-5xl"
         v-if="isBusy"
       />
-      <div v-else class="flex gap-4 flex-wrap">
+      <div v-else class="flex gap-4 flex-wrap justify-center">
         <MovieCard
           v-for="(movie, index) in movies"
           :key="index"

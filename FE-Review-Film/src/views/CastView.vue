@@ -29,11 +29,12 @@
           v-else
           v-for="(cast, index) in castMembers"
           :key="index"
-          class="bg-white border border-gray-300 rounded-lg shadow-md p-4 m-2 max-w-xs text-center"
+          @click="!isAdmin ? handleDetail(cast.id) : ''"
+          class="bg-white border border-gray-300 rounded-lg shadow-md p-4 m-2 max-w-xs pl-3 cursor-pointer"
         >
           <h3 class="text-lg font-bold">{{ cast.name }}</h3>
-          <p>{{ cast.age }}</p>
-          <p>{{ cast.bio }}</p>
+          <p class="my-1"><strong>Age: </strong> {{ cast.age }}</p>
+          <p><strong>Bio: </strong>{{ cast.bio.substring(0, 60) }}...</p>
           <div class="flex gap-2 mt-5" v-if="isAdmin">
             <div
               @click="handleDetail(cast.id)"

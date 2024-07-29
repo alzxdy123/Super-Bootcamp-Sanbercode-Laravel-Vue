@@ -12,7 +12,14 @@
     </div>
     <div class="p-4">
       <h3 class="text-lg font-semibold">{{ movie.title }}</h3>
-      <p class="text-gray-600">{{ movie.year }}</p>
+      <p class="text-gray-600">{{ formatDateToYear(movie.year) }}</p>
+    </div>
+
+    <div
+      class="absolute top-0 left-0 px-2 py-1 rounded-br-lg bg-yellow-400 text-white"
+      v-if="movie.genre"
+    >
+      {{ movie.genre.name }}
     </div>
 
     <div class="flex gap-2 m-5" v-if="isAdmin">
@@ -55,6 +62,12 @@ const emit = defineEmits(["refresh"]);
 const router = useRouter();
 
 const isAdmin = Functions.ReadSessionCustom("isAdmin");
+
+const formatDateToYear = (dateString) => {
+  if (!dateString) return "";
+  const [year] = dateString.split("-");
+  return year;
+};
 
 const handleDetail = (id) => {
   MovieService.Detail(id)

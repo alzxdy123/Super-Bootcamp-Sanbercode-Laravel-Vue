@@ -16,7 +16,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $movie = Movie::all();
+        $movie = Movie::with('genre:id,name')->get();
 
         return response()->json([
             'message' => 'Tampil data berhasil',
