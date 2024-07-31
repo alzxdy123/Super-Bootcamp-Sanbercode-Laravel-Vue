@@ -27,21 +27,21 @@ class UserSeeder extends Seeder
 
         User::create([
             'username' => 'Aldy BD',
-            'email' => 'aldy@gmailcom',
+            'email' => 'aldy@gmail.com',
             'password' => Hash::make('Aldy123#'),
             'role_id' => $user->id
         ]);
 
         User::create([
             'username' => 'Syarif Nurhakim',
-            'email' => 'syarif@gmailcom',
+            'email' => 'syarif@gmail.com',
             'password' => Hash::make('Syarif123#'),
             'role_id' => $user->id
         ]);
 
         User::create([
             'username' => 'Azi PY',
-            'email' => 'azi@gmailcom',
+            'email' => 'azi@gmail.com',
             'password' => Hash::make('Azi123#'),
             'role_id' => $user->id
         ]);
