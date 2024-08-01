@@ -1,11 +1,13 @@
 import axios from "axios";
 
+const baseURL = import.meta.env.VITE_PERPUSATAKAAN_SERVICE;
+
 export const AXIOS = axios.create({
-  baseURL: "http://127.0.0.1:8000/api",
+  baseURL: baseURL,
 });
 
 AXIOS.interceptors.request.use(function (config) {
-  config.baseURL = "http://127.0.0.1:8000/api";
+  config.baseURL = baseURL;
 
   return config;
 });

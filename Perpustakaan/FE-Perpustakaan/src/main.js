@@ -1,4 +1,4 @@
-import "./main.scss";
+import "./assets/scss/init.scss";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue-next/dist/bootstrap-vue-next.css";
 import "jam-icons/css/jam.min.css";

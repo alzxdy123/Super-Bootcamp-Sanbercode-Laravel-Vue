@@ -13,17 +13,4 @@ export default {
 
     return config;
   },
-  authHeaderMulti() {
-    let token = Functions.ReadSessionCustom("token");
-
-    let config = {
-      headers: {
-        Accept: "application/json",
-        Authorization: "Bearer " + token,
-        "Content-Type": "multipart/form-data",
-      },
-    };
-
-    return config;
-  },
 };
