@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
+import Functions from "./tools/Functions";
 
 import LoginView from "./views/Auth/LoginView.vue";
 import RegisterView from "./views/Auth/RegisterView.vue";
 
 import UserLayout from "./views/User/UserLayout.vue";
 import HomeView from "./views/User/HomeView.vue";
-import Functions from "./tools/Functions";
+import BookView from "./views/User/BookView.vue";
+import CategoryView from "./views/User/CategoryView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +22,16 @@ const router = createRouter({
           path: "/home",
           name: "home",
           component: HomeView,
+        },
+        {
+          path: "/book",
+          name: "book",
+          component: BookView,
+        },
+        {
+          path: "/category",
+          name: "category",
+          component: CategoryView,
         },
       ],
     },

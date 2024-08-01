@@ -1,5 +1,5 @@
 <template>
-  <BNavbar toggleable="lg" class="navbar px-3">
+  <BNavbar toggleable="lg" class="navbar px-5">
     <BNavbarBrand href="#" class="pe-5">Perpustakaan</BNavbarBrand>
     <BNavbarToggle target="nav-collapse" />
     <BCollapse id="nav-collapse" is-nav>
@@ -8,9 +8,21 @@
       </BNavForm>
 
       <BNavbarNav class="ms-auto mb-2 mb-lg-0 gap-3">
-        <BNavItem href="#">Home</BNavItem>
-        <BNavItem href="#">Book</BNavItem>
-        <BNavItem href="#">Category</BNavItem>
+        <BNavItem
+          :class="$route.path == '/home' ? 'active' : ''"
+          @click="Functions.ToPage('/home')"
+          >Home</BNavItem
+        >
+        <BNavItem
+          :class="$route.path == '/book' ? 'active' : ''"
+          @click="Functions.ToPage('/book')"
+          >Book</BNavItem
+        >
+        <BNavItem
+          :class="$route.path == '/category' ? 'active' : ''"
+          @click="Functions.ToPage('/category')"
+          >Category</BNavItem
+        >
 
         <BNavItemDropdown text="Language" right>
           <BDropdownItem href="#">Indonesia</BDropdownItem>
@@ -60,4 +72,8 @@ const HandleLogout = () => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.active {
+  border-bottom: 1px solid black;
+}
+</style>

@@ -89,17 +89,34 @@ class BookController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Book $book)
-{
-    if ($book->cover) {
-        $coverPath = 'covers/' . basename($book->cover);
-        if (Storage::disk('public')->exists($coverPath)) {
-            Storage::disk('public')->delete($coverPath);
+    {
+        if ($book->cover) {
+            $coverPath = 'covers/' . basename($book->cover);
+            if (Storage::disk('public')->exists($coverPath)) {
+                Storage::disk('public')->delete($coverPath);
+            }
         }
+
+        $book->delete();
+
+        return response()->json(['message' => 'Book deleted || Buku berhasil dihapus'], 200);
     }
 
-    $book->delete();
+    public function search(Request $request) {
+        $books = Book::where('title', 'like', '%' . $request->keyword . '%')->get();
+        return response()->json(['data' => $books], 200);
+    }
 
-    return response()->json(['message' => 'Book deleted || Buku berhasil dihapus'], 200);
-}
+    public function filter(Request $request) {
+        $books = Book::where('category_id', $request->category_id)->get();
+        return response()->json(['data' => $books], 200);
+    }
+
+    public function home()
+    {
+        $latestBooks = Book::orderBy('created_at', 'desc')->take(10)->get();
+
+        return response()->json(['data' => $latestBooks], 200);
+    }
 
 }

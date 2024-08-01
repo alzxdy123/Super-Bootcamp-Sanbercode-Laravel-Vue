@@ -22,6 +22,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('role', RoleController::class)->except(['show'])->middleware(['auth:api', 'owner']);
     Route::apiResource('category', CategoryController::class);
     Route::apiResource('book', BookController::class);
+    Route::get('book/home', [ BookController::class,'home']);
     Route::apiResource('borrow', BorrowController::class);
 
 });
