@@ -14,9 +14,27 @@ class BookController extends Controller
         $this->middleware(['auth:api', 'owner'])->only('update', 'destroy', 'store');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::with('category')->get();
+        $books = Book::with('category');
+
+        if($request->input('title')) {
+            $books->where('title', 'like', '%'.$request->input('title').'%');
+        }
+
+        if($request->input('status')) {
+            $books->where('status', $request->input('status'));
+        }
+
+        if($request->input('category_id')) {
+            $books->where('category_id', $request->input('category_id'));
+        }
+
+        $books = $books->get();
+
+        if($books->isEmpty()) {
+            return response()->json(['message' => 'Book not found || Buku tidak ditemukan'], 404);
+        }
 
         return response()->json(['data' => $books], 200);
     }
@@ -34,6 +52,12 @@ class BookController extends Controller
             $cover->storeAs('covers', $coverName, 'public');
 
             $coverData = env('APP_URL').'/storage/covers/'.$coverName;
+        }
+
+        if($request->stok > 0) {
+             $request['status'] = "A";
+        } else {
+            $request['status'] = "N";
         }
 
         $data = $request->all();
@@ -75,6 +99,12 @@ class BookController extends Controller
             $coverPath = $cover->storeAs('covers', $coverName, 'public');
             $coverData = env('APP_URL').'/storage/' . $coverPath;
         }
+
+        if($request->stok > 0) {
+            $request['status'] = "A";
+       } else {
+           $request['status'] = "N";
+       }
     
         $data = $request->all();
         $data['cover'] = $coverData;
@@ -102,21 +132,6 @@ class BookController extends Controller
         return response()->json(['message' => 'Book deleted || Buku berhasil dihapus'], 200);
     }
 
-    public function search(Request $request) {
-        $books = Book::where('title', 'like', '%' . $request->keyword . '%')->get();
-        return response()->json(['data' => $books], 200);
-    }
 
-    public function filter(Request $request) {
-        $books = Book::where('category_id', $request->category_id)->get();
-        return response()->json(['data' => $books], 200);
-    }
-
-    public function home()
-    {
-        $latestBooks = Book::orderBy('created_at', 'desc')->take(10)->get();
-
-        return response()->json(['data' => $latestBooks], 200);
-    }
 
 }

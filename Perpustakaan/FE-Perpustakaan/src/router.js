@@ -1,13 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Functions from "./tools/Functions";
 
-import LoginView from "./views/Auth/LoginView.vue";
-import RegisterView from "./views/Auth/RegisterView.vue";
+import Login from "./components/auth/Login.vue";
+import Register from "./components/auth/Register.vue";
 
-import UserLayout from "./views/User/UserLayout.vue";
-import HomeView from "./views/User/HomeView.vue";
-import BookView from "./views/User/BookView.vue";
-import CategoryView from "./views/User/CategoryView.vue";
+import Public from "./components/public/Public.vue";
+import PublicHome from "./components/public/PublicHome.vue";
+import PublicBook from "./components/public/PublicBook.vue";
+import PublicCategory from "./components/public/PublicCategory.vue";
+
+import Dashboard from "./components/private/Dashboard.vue";
+import Book from "./components/private/book/Book.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,23 +18,39 @@ const router = createRouter({
     {
       path: "/",
       redirect: "/home",
-      name: "user",
-      component: UserLayout,
+      name: "public",
+      component: Public,
       children: [
         {
           path: "/home",
           name: "home",
-          component: HomeView,
+          component: PublicHome,
         },
         {
           path: "/book",
           name: "book",
-          component: BookView,
+          component: PublicBook,
         },
         {
           path: "/category",
           name: "category",
-          component: CategoryView,
+          component: PublicCategory,
+        },
+      ],
+    },
+
+    {
+      path: "/dashboard",
+      name: "dashboard",
+      component: Dashboard,
+      meta: {
+        onlyOwner: true,
+      },
+      children: [
+        {
+          path: "/dashboard/book",
+          name: "dashboardBook",
+          component: Book,
         },
       ],
     },
@@ -39,12 +58,12 @@ const router = createRouter({
     {
       path: "/login",
       name: "login",
-      component: LoginView,
+      component: Login,
     },
     {
       path: "/register",
       name: "register",
-      component: RegisterView,
+      component: Register,
     },
   ],
 });
@@ -66,6 +85,17 @@ router.beforeEach((to, from, next) => {
 
   if (token != null && to.path == "/login") {
     Functions.Notification("error", "Error", "Anda sudah login");
+    return next({
+      path: "/",
+      query: {
+        returnUrl: to.path,
+      },
+    });
+  }
+
+  const user = Functions.ReadSessionCustom("user");
+
+  if (to.meta.onlyOwner && user.role !== "owner") {
     return next({
       path: "/",
       query: {

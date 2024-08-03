@@ -29,8 +29,12 @@
               Tidak tersedia
             </div>
             <h5>{{ book.title }}</h5>
-            <div>{{ book.category.name }}</div>
-            <div>{{ book.author }}</div>
+            <div style="font-size: 13px; color: grey">
+              {{ book.category.name }}
+            </div>
+            <div style="font-size: 13px; color: grey">
+              {{ book.author }}
+            </div>
           </div>
         </div>
       </div>
@@ -39,7 +43,7 @@
 </template>
 
 <script setup>
-import Hero from "@/components/Hero.vue";
+import Hero from "@/components/common/Hero.vue";
 import BookService from "@/services/BookService";
 import CategoryService from "@/services/CategoryService";
 import { onMounted, ref } from "vue";

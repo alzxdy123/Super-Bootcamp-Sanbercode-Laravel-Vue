@@ -74,6 +74,7 @@
 <script setup>
 import AuthService from "@/services/AuthService";
 import Functions from "@/tools/Functions";
+import { jwtDecode } from "jwt-decode";
 import { ref, reactive, computed, onMounted } from "vue";
 
 const form = reactive({
@@ -106,6 +107,20 @@ const Login = () => {
         errorMessage.error = "";
         isBusy.value = false;
         Functions.SaveSessionCustom("token", res.data.token);
+
+        const user = jwtDecode(res.data.token);
+
+        const userData = {
+          username: user.username,
+          email: user.email,
+          role: "user",
+        };
+
+        if (user.role_id == "9ca333fa-e11f-4d86-9ce0-430f1d5fd5f6") {
+          userData.role = "owner";
+        }
+
+        Functions.SaveSessionCustom("user", userData);
 
         Functions.Notification("success", "Login", "Login Success");
         Functions.ToPage("/");

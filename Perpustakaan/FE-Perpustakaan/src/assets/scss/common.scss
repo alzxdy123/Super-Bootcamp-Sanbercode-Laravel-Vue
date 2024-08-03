@@ -5,6 +5,11 @@
   font-family: sans-serif;
 }
 
+main {
+  background-color: #f2f2f2;
+  padding-bottom: 100px;
+}
+
 .notification {
   margin-top: 20px;
   margin-right: 15px;
@@ -13,4 +18,42 @@
 .navbar {
   height: 80px;
   background-color: white;
+}
+
+.modal {
+  .modal-body {
+    padding: 50px;
+  }
+
+  .modal-header {
+    padding: 30px;
+  }
+
+  .modal-footer {
+    padding: 20px;
+
+    button {
+      background-color: black;
+      color: white;
+    }
+  }
+}
+
+.has-error {
+  input {
+    border-color: red;
+    color: red;
+  }
+
+  label {
+    color: red;
+  }
+
+  textarea {
+    border-color: red;
+  }
+
+  .error {
+    color: red;
+  }
 }

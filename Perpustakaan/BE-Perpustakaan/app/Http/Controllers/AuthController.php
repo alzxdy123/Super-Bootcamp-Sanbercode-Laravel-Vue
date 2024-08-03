@@ -42,7 +42,14 @@ class AuthController extends Controller
         }
 
         $user = User::where('email', $request->email)->first();
-        $token = JWTAuth::fromUser($user);
+        $customClaims = [
+            'username' => $user->username,
+            'email' => $user->email,
+            'role_id' => $user->role_id,
+        ];
+    
+        $token = JWTAuth::claims($customClaims)->fromUser($user);
+        // $token = JWTAuth::fromUser($user);
 
         return response()->json(['token' => $token], 200);
     }

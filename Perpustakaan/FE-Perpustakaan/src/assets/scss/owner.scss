@@ -1,0 +1,80 @@
+.owner {
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 30px;
+    background: white;
+
+    button {
+      padding: 5px 50px;
+      background-color: black;
+      color: white;
+      border-radius: 7px;
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      -ms-border-radius: 7px;
+      -o-border-radius: 7px;
+    }
+  }
+
+  .table {
+    background-color: white;
+    padding: 40px;
+
+    .filter {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+
+      .v-select {
+        width: 200px;
+      }
+    }
+
+    .content-action {
+      display: flex;
+      gap: 10px;
+      margin-left: 50px;
+      justify-content: center;
+
+      button {
+        padding: 5px 10px;
+        background: #000;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background: #444;
+        }
+      }
+    }
+    .pagination-tables {
+      .page-item {
+        .page-link {
+          background-color: white;
+          color: black;
+          box-shadow: none;
+        }
+
+        .page-link:hover {
+          background-color: #000;
+          color: white;
+        }
+      }
+
+      .page-item.active {
+        .page-link {
+          background-color: #000;
+          color: white;
+        }
+      }
+    }
+  }
+}
