@@ -12,9 +12,15 @@ class CategoryController extends Controller
         $this->middleware(['auth:api', 'owner'])->only('update', 'destroy', 'store');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all();
+        $categories = Category::query();
+
+        if($request->input('name')) {
+            $categories->where('name', 'like', '%'.$request->input('name').'%');
+        }
+
+        $categories = $categories->get();
 
         return response()->json(['data' => $categories], 200);
     }
@@ -34,7 +40,11 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $category = Category::with('list_books')->find($category->id);
+        if(!$category) {
+            return response()->json(['message' => 'Category not found || Kategori tidak ditemukan'], 404);
+        }
+
+        $category = Category::with('list_books.category')->find($category->id);
 
         return response()->json(['data' => $category], 200);
     }

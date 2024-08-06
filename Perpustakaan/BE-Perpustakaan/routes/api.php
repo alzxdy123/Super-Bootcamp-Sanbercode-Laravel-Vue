@@ -24,6 +24,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('book', BookController::class);
     Route::get('book/home', [ BookController::class,'home']);
     Route::apiResource('borrow', BorrowController::class);
+    Route::post('check', [BorrowController::class, 'checkIfBorrowed']);
 
 });
 

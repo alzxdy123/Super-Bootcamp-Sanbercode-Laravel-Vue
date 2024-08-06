@@ -3,14 +3,12 @@
     <div class="container mt-5">
       <div class="category">
         <BSpinner v-if="isBusy" style="width: 3rem; height: 3rem" />
-        <div
+        <CategoryBox
           v-else
           v-for="category in categories"
           :key="category.id"
-          class="box"
-        >
-          {{ category.name }}
-        </div>
+          :category="category"
+        />
       </div>
     </div>
   </div>
@@ -19,6 +17,7 @@
 <script setup>
 import CategoryService from "@/services/CategoryService";
 import { onMounted, ref } from "vue";
+import CategoryBox from "../CategoryBox.vue";
 
 const isBusy = ref(false);
 const categories = ref();

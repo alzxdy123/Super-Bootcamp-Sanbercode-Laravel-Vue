@@ -6,36 +6,18 @@
       <h3 class="mb-4 font-weight-bold" style="font-weight: bold">Category</h3>
       <div class="category">
         <BSpinner v-if="isBusy" style="width: 3rem; height: 3rem" />
-        <div
+        <CategoryBox
           v-else
           v-for="category in categories"
           :key="category.id"
-          class="box"
-        >
-          {{ category.name }}
-        </div>
+          :category="category"
+        />
       </div>
-    </div>
-
-    <div class="container book">
-      <h3>Book</h3>
-      <div class="book-wrap">
-        <BSpinner v-if="isBusy" style="width: 3rem; height: 3rem" />
-        <div class="book-card" v-else v-for="book in books">
-          <img :src="book.cover" />
-          <div class="content">
-            <div class="avaible" v-if="book.status == 'A'">Tersedia</div>
-            <div class="unavaible" v-if="book.status == 'N'">
-              Tidak tersedia
-            </div>
-            <h5>{{ book.title }}</h5>
-            <div style="font-size: 13px; color: grey">
-              {{ book.category.name }}
-            </div>
-            <div style="font-size: 13px; color: grey">
-              {{ book.author }}
-            </div>
-          </div>
+      <div class="book">
+        <h3>Book</h3>
+        <BSpinner v-if="isBusyBook" style="width: 3rem; height: 3rem" />
+        <div class="book-wrap" v-else>
+          <BookCard v-for="book in books" :key="book.id" :book="book" />
         </div>
       </div>
     </div>
@@ -47,10 +29,13 @@ import Hero from "@/components/common/Hero.vue";
 import BookService from "@/services/BookService";
 import CategoryService from "@/services/CategoryService";
 import { onMounted, ref } from "vue";
+import CategoryBox from "../CategoryBox.vue";
+import BookCard from "../BookCard.vue";
 
 const categories = ref();
 const books = ref();
 const isBusy = ref(false);
+const isBusyBook = ref(false);
 const errorMessage = ref({});
 
 const getCategory = () => {
@@ -66,11 +51,11 @@ const getCategory = () => {
 };
 
 const getBook = () => {
-  isBusy.value = true;
+  isBusyBook.value = true;
 
   BookService.GetAll()
     .then((res) => {
-      isBusy.value = false;
+      isBusyBook.value = false;
 
       books.value = res.data.data;
     })

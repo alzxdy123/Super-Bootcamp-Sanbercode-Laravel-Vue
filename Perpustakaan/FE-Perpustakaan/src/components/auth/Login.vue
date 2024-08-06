@@ -116,7 +116,9 @@ const Login = () => {
           role: "user",
         };
 
-        if (user.role_id == "9ca333fa-e11f-4d86-9ce0-430f1d5fd5f6") {
+        console.log(user.role_id);
+
+        if (user.role_id == "9cafd0ce-6535-4797-aced-42f455c88044") {
           userData.role = "owner";
         }
 

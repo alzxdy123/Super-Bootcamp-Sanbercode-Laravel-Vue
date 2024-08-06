@@ -191,6 +191,7 @@ const Reset = () => {
   form.title = "";
   form.summary = "";
   form.cover = null;
+  form.coverUrl = "";
   form.stok = "";
   form.author = "";
   form.category = "";

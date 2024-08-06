@@ -11,6 +11,11 @@ import PublicCategory from "./components/public/PublicCategory.vue";
 
 import Dashboard from "./components/private/Dashboard.vue";
 import Book from "./components/private/book/Book.vue";
+import Bookdetail from "./components/private/book/Bookdetail.vue";
+import Category from "./components/private/category/Category.vue";
+import Role from "./components/private/role/Role.vue";
+import CaetegoryDetail from "./components/private/category/CaetegoryDetail.vue";
+import Borrow from "./components/private/borrow/Borrow.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,6 +56,49 @@ const router = createRouter({
           path: "/dashboard/book",
           name: "dashboardBook",
           component: Book,
+          meta: {
+            onlyOwner: true,
+          },
+        },
+        {
+          path: "/dashboard/book/detail",
+          name: "dashboardBookDetail",
+          component: Bookdetail,
+          meta: {
+            onlyOwner: true,
+          },
+        },
+        {
+          path: "/dashboard/category",
+          name: "dashboardCategory",
+          component: Category,
+          meta: {
+            onlyOwner: true,
+          },
+        },
+        {
+          path: "/dashboard/category/detail",
+          name: "dashboardCategoryDetail",
+          component: CaetegoryDetail,
+          meta: {
+            onlyOwner: true,
+          },
+        },
+        {
+          path: "/dashboard/role",
+          name: "dashboardRole",
+          component: Role,
+          meta: {
+            onlyOwner: true,
+          },
+        },
+        {
+          path: "/dashboard/borrow",
+          name: "dashboardBorrow",
+          component: Borrow,
+          meta: {
+            onlyOwner: true,
+          },
         },
       ],
     },

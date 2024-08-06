@@ -10,9 +10,19 @@
           >Book</BNavItem
         >
         <BNavItem
-          :class="$route.path == '/category' ? 'active' : ''"
-          @click="Functions.ToPage('/category')"
+          :class="$route.path == '/dashboard/borrow' ? 'active' : ''"
+          @click="Functions.ToPage('/dashboard/borrow')"
+          >Borrow</BNavItem
+        >
+        <BNavItem
+          :class="$route.path == '/dashboard/category' ? 'active' : ''"
+          @click="Functions.ToPage('/dashboard/category')"
           >Category</BNavItem
+        >
+        <BNavItem
+          :class="$route.path == '/dashboard/role' ? 'active' : ''"
+          @click="Functions.ToPage('/dashboard/role')"
+          >Role</BNavItem
         >
         <BNavItemDropdown text="Language" right>
           <BDropdownItem href="#">Indonesia</BDropdownItem>
@@ -34,7 +44,7 @@
     </BCollapse>
     <BCollapse id="nav-collapse" is-nav v-else>
       <BNavForm class="d-flex">
-        <BFormInput class="me-2" placeholder="Search" />
+        <BFormInput class="me-2" placeholder="Search" v-model="inputSearch" />
       </BNavForm>
       <BNavbarNav class="ms-auto mb-2 mb-lg-0 gap-3">
         <BNavItem
@@ -80,7 +90,9 @@
 
 <script setup>
 import AuthService from "@/services/AuthService";
+import BookService from "@/services/BookService";
 import Functions from "@/tools/Functions";
+import { reactive, watch } from "vue";
 import { onMounted, ref } from "vue";
 
 const props = defineProps({
@@ -92,23 +104,64 @@ const props = defineProps({
 const isBusy = ref(false);
 const HandleLogout = () => {
   isBusy.value = true;
-  Functions.Notification("warn", "Logout", "Loging out...");
-  AuthService.Logout()
-    .then(() => {
-      isBusy.value = false;
-      localStorage.clear();
-      Functions.Notification("success", "Logout", "Logout Success");
-      Functions.ToPage("/login");
+  // Functions.Notification("warn", "Logout", "Loging out...");
+  localStorage.clear();
+  Functions.ToPage("/login");
+  // AuthService.Logout()
+  //   .then(() => {
+  //     isBusy.value = false;
+  //     localStorage.clear();
+  //     Functions.Notification("success", "Logout", "Logout Success");
+  //     Functions.ToPage("/login");
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     Functions.Notification("error", "Logout", err.response.data.message);
+  //   });
+};
+
+const inputSearch = ref("");
+const book = reactive({});
+
+const handleSearch = () => {
+  const params = {
+    title: inputSearch.value,
+  };
+
+  BookService.GetAll(params)
+    .then((res) => {
+      let data = res.data.data;
+      book.value = data[0];
+
+      BookService.GetDetail(book.value.id)
+        .then((res) => {
+          // console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       console.log(err);
-      Functions.Notification("error", "Logout", err.response.data.message);
     });
 };
+
+watch(
+  () => inputSearch.value,
+  (newVal) => {
+    handleSearch();
+  },
+  {
+    deep: true,
+  }
+);
+
 const user = ref({});
+
 onMounted(() => {
   const userData = Functions.ReadSessionCustom("user");
   user.value = userData;
+  // handleSearch();
 });
 </script>
 

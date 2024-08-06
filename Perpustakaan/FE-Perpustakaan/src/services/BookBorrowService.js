@@ -7,30 +7,35 @@ export default {
       ...header.authHeader(),
       params: params,
     };
-    return AXIOS.get("v1/category", config);
+    return AXIOS.get("v1/borrow", config);
   },
 
   Detail(id) {
     const config = {
       ...header.authHeader(),
     };
-    return AXIOS.get("v1/category/" + id, config);
+    return AXIOS.get("v1/borrow/" + id, config);
   },
 
   Add(reqBody) {
     const config = {
       ...header.authHeader(),
     };
-    return AXIOS.post("v1/category", reqBody, config);
+    return AXIOS.post("v1/borrow", reqBody, config);
   },
 
   Update(id, reqBody) {
     const config = { ...header.authHeader() };
-    return AXIOS.post("v1/category/" + id + "?_method=PUT", reqBody, config);
+    return AXIOS.post("v1/borrow/" + id + "?_method=PUT", reqBody, config);
   },
 
   Delete(id) {
     const config = { ...header.authHeader() };
-    return AXIOS.delete("v1/category/" + id, config);
+    return AXIOS.delete("v1/borrow/" + id, config);
+  },
+
+  Check(reqBody) {
+    const config = { ...header.authHeader() };
+    return AXIOS.post("v1/check", reqBody, config);
   },
 };

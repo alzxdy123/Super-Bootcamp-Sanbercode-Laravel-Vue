@@ -11,9 +11,15 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $roles = Role::all();
+        $roles = Role::query();
+
+        if($request->input('name')) {
+            $roles->where('name', 'like', '%'.$request->input('name').'%');
+        }
+
+        $roles = $roles->get();
 
         return response()->json(['data' => $roles], 200);
     }

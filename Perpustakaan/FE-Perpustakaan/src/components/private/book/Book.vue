@@ -122,7 +122,7 @@ const selectedItem = ref(null);
 const filterQuery = reactive({
   title: "",
   category_id: "",
-  status: "A",
+  status: "",
 });
 const errorMessage = ref("");
 
@@ -170,8 +170,8 @@ const getBooks = () => {
     });
 };
 const HandleDetail = (book) => {
-  Functions.SaveSessionCustom("book", book);
-  Functions.ToPage("/");
+  Functions.SaveSessionCustom("bookId", book.id);
+  Functions.ToPage("/dashboard/book/detail");
 };
 const HandleEdit = (book) => {
   action.value = "U";
