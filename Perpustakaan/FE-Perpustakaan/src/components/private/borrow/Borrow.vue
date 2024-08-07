@@ -5,7 +5,7 @@
       <button @click="HandleAdd()">Add</button>
     </div>
     <div class="table table-responsive">
-      <div class="filter">
+      <!-- <div class="filter">
         <BFormGroup class="d-flex">
           <BFormInput
             class="me-2"
@@ -14,7 +14,7 @@
             v-model="filterQuery.name"
           />
         </BFormGroup>
-      </div>
+      </div> -->
       <BTable
         :items="roles"
         :fields="fields"
@@ -29,9 +29,21 @@
           </div>
         </template>
 
+        <template #cell(status)="data">
+          <div v-if="data.item.status == 'P'" class="text-warning">
+            Di Pinjam
+          </div>
+          <div v-else-if="data.item.status == 'K'" class="text-success">
+            Di Kembalikan
+          </div>
+          <div v-else-if="data.item.status == 'T'" class="text-danger">
+            Terlambat Kembalikan
+          </div>
+        </template>
+
         <template #cell(action)="data">
           <div class="content-action">
-            <button @click="HandleEdit(data.item)">Detail</button>
+            <button @click="HandleDetail(data.item)">Detail</button>
             <button @click="HandleEdit(data.item)">Edit</button>
             <button @click="HandleDelete(data.item)">Hapus</button>
           </div>
@@ -49,9 +61,9 @@
       <BorrowFormModal
         v-model="showModal"
         :actionType="action"
-        :role="selectedItem"
+        :borrow="selectedItem"
         @close="showModal = false"
-        @refresh="getRole()"
+        @refresh="getBorrow()"
       />
     </div>
   </div>
@@ -71,15 +83,20 @@ const perPage = ref(5);
 const totalRows = computed(() => roles.value?.length || 0);
 const fields = ref([
   { key: "user.username", label: "Username" },
+  { key: "book.title", label: "Book" },
   {
     key: "tanggal_pinjam",
     label: "Tanggal Pinjam",
-    formatter: (value) => moment(value).format("DD-MM-YYYY"),
+    formatter: (value) => {
+      return moment(value).format("DD MMMM YYYY");
+    },
   },
   {
     key: "tanggal_kembali",
     label: "Batas Waktu",
-    formatter: (value) => moment(value).format("DD-MM-YYYY"),
+    formatter: (value) => {
+      return moment(value).format("DD MMMM YYYY");
+    },
   },
   { key: "status", label: "status" },
   {
@@ -92,22 +109,27 @@ const isBusy = ref(false);
 const action = ref("");
 const selectedItem = ref(null);
 const filterQuery = reactive({
-  name: "",
+  username: "",
 });
 const errorMessage = ref("");
 
 const HandleAdd = () => {
   action.value = "A";
   selectedItem.value = {
-    name: "",
-    backgroundUrl: "",
-    background: null,
+    username: "",
+    book: "",
   };
   showModal.value = true;
 };
-const getRole = () => {
+
+const HandleDetail = (borrow) => {
+  Functions.SaveSessionCustom("borrowId", borrow.id);
+  Functions.ToPage("/dashboard/borrow/detail");
+};
+
+const getBorrow = () => {
   const params = {
-    name: filterQuery.name,
+    username: filterQuery.username,
   };
 
   isBusy.value = true;
@@ -121,9 +143,9 @@ const getRole = () => {
     });
 };
 
-const HandleEdit = (role) => {
+const HandleEdit = (borrow) => {
   action.value = "U";
-  selectedItem.value = role;
+  selectedItem.value = borrow;
   showModal.value = true;
 };
 
@@ -132,8 +154,8 @@ const HandleDelete = (role) => {
   BookBorrowService.Delete(role.id)
     .then((res) => {
       isBusy.value = false;
-      Functions.Notification("success", "Delete Role", res.data.message);
-      getRole();
+      Functions.Notification("success", "Delete Borrow", res.data.message);
+      getBorrow();
     })
     .catch((err) => {
       console.log(err);
@@ -144,8 +166,7 @@ watch(
   () => filterQuery,
   (newVal) => {
     currentPage.value = 1;
-    getRole();
-    console.log(newVal);
+    getBorrow();
   },
   {
     deep: true,
@@ -153,7 +174,7 @@ watch(
 );
 
 onMounted(() => {
-  getRole();
+  getBorrow();
 });
 </script>
 

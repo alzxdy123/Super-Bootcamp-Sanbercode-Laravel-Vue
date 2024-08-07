@@ -11,7 +11,10 @@
       <div>{{ props.book.author }}</div>
       <div>
         <BSpinner v-if="isBusyBorrow" small />
-        <button class="btn-borrow" @click="Borrow()">Borrow</button>
+        <button class="btn-borrow" @click="Borrow()">
+          <BSpinner v-if="isBusy" small></BSpinner>
+          <span v-else>Pinjam</span>
+        </button>
       </div>
     </div>
   </div>
@@ -61,6 +64,7 @@ const Borrow = () => {
       console.log(res);
     })
     .catch((err) => {
+      isBusy.value = false;
       console.log(err);
       Functions.Notification("error", "Borrow", err.response.data.message);
     });

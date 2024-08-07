@@ -16,6 +16,7 @@ import Category from "./components/private/category/Category.vue";
 import Role from "./components/private/role/Role.vue";
 import CaetegoryDetail from "./components/private/category/CaetegoryDetail.vue";
 import Borrow from "./components/private/borrow/Borrow.vue";
+import BorrowDetail from "./components/private/borrow/BorrowDetail.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -96,6 +97,14 @@ const router = createRouter({
           path: "/dashboard/borrow",
           name: "dashboardBorrow",
           component: Borrow,
+          meta: {
+            onlyOwner: true,
+          },
+        },
+        {
+          path: "/dashboard/borrow/detail",
+          name: "dashboardBorrowDetail",
+          component: BorrowDetail,
           meta: {
             onlyOwner: true,
           },

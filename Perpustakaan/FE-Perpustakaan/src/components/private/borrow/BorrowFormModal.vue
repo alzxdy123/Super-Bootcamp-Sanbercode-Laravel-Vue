@@ -1,7 +1,7 @@
 <template>
   <BModal centered size="md" title="false">
     <template #header>
-      <h5 class="modal-title">{{ title }} Role</h5>
+      <h5 class="modal-title">{{ title }} Borrow</h5>
       <BButton
         class="btn-close"
         @click="emit('close')"
@@ -12,13 +12,43 @@
     <div>
       <BFormGroup
         class="mb-3"
-        :class="errMessage.name ? 'has-error' : ''"
+        :class="errMessage.username ? 'has-error' : ''"
         label="Name"
       >
-        <BFormInput v-model="form.name" />
-        <div v-if="errMessage.name" class="text-danger">
-          {{ Functions.ErrorMessage(errMessage.name) }}
-        </div>
+        <v-select
+          :loading="isBusyUser"
+          :options="users"
+          v-model="form.username"
+          label="username"
+          :disabled="props.actionType == 'U'"
+        ></v-select>
+      </BFormGroup>
+
+      <BFormGroup
+        class="mb-3"
+        :class="errMessage.book ? 'has-error' : ''"
+        label="Book"
+      >
+        <v-select
+          :loading="isBusyBook"
+          :options="books"
+          v-model="form.book"
+          label="title"
+          :disabled="props.actionType == 'U'"
+        ></v-select>
+      </BFormGroup>
+
+      <BFormGroup
+        v-if="props.actionType == 'U'"
+        class="mb-3"
+        :class="errMessage.status ? 'has-error' : ''"
+        label="Status"
+      >
+        <v-select
+          :options="status"
+          v-model="form.status"
+          :reduce="(status) => status.value"
+        ></v-select>
       </BFormGroup>
     </div>
 
@@ -26,23 +56,25 @@
       <BButton @click="emit('close')">Close</BButton>
       <BButton style="width: 150px" @click="HandleSubmit()">
         <BSpinner v-if="isBusy" small />
-        <span v-else>{{ title }} Role</span>
+        <span v-else>{{ title }} Borrow</span>
       </BButton>
     </template>
   </BModal>
 </template>
 
 <script setup>
-import RoleService from "@/services/RoleService";
+import AuthService from "@/services/AuthService";
+import BookBorrowService from "@/services/BookBorrowService";
+import BookService from "@/services/BookService";
 import Functions from "@/tools/Functions";
-import { reactive, ref, computed, watch } from "vue";
+import { reactive, ref, computed, watch, onMounted } from "vue";
 
 const props = defineProps({
   actionType: {
     type: String,
     default: "A",
   },
-  role: {
+  borrow: {
     type: Object,
     default: {},
   },
@@ -51,21 +83,69 @@ const emit = defineEmits(["close", "refresh"]);
 const isBusy = ref(false);
 const errMessage = ref("");
 const form = reactive({
-  name: "",
+  username: "",
+  book: "",
+  tgl_pinjam: "",
+  tgl_kembali: "",
+  status: "",
 });
+const users = ref([]);
+const books = ref([]);
+const isBusyUser = ref(false);
+const isBusyBook = ref(false);
+const status = ref([
+  { label: "Di Pinjam", value: "P" },
+  { label: "Di kembalikan", value: "K" },
+  { label: "Terlambat", value: "T" },
+]);
+
+const getUser = () => {
+  isBusyUser.value = true;
+
+  AuthService.getUser()
+    .then((res) => {
+      isBusyUser.value = false;
+      users.value = res.data.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      isBusyUser.value = false;
+    });
+};
+
+const getBook = () => {
+  isBusyBook.value = true;
+
+  BookService.GetAll()
+    .then((res) => {
+      isBusyBook.value = false;
+      books.value = res.data.data;
+    })
+    .catch((err) => {
+      isBusyBook.value = false;
+      console.log(err);
+    });
+};
 
 const title = computed(() => {
   return props.actionType === "A" ? "Add" : "Edit";
 });
+
 const HandleAdd = () => {
   isBusy.value = true;
-  const reqBody = new FormData();
-  reqBody.append("name", form.name);
-  RoleService.Add(reqBody)
+
+  const reqBody = {
+    user_id: form.username.id,
+    book_id: form.book.id,
+  };
+
+  console.log(reqBody);
+
+  BookBorrowService.AddAdmin(reqBody)
     .then((res) => {
       isBusy.value = false;
       errMessage.value = "";
-      Functions.Notification("success", "Add Category", res.data.message);
+      Functions.Notification("success", "Add Borrow", res.data.message);
       Reset();
       emit("close");
       emit("refresh");
@@ -77,13 +157,12 @@ const HandleAdd = () => {
 };
 const handleEdit = () => {
   isBusy.value = true;
-  const reqBody = new FormData();
-  reqBody.append("name", form.name);
-  if (form.cover) {
-    reqBody.append("background", form.background);
-  }
 
-  RoleService.Update(props.role.id, reqBody)
+  const reqBody = {
+    status: form.status,
+  };
+
+  BookBorrowService.Update(props.borrow.id, reqBody)
     .then((res) => {
       isBusy.value = false;
       Functions.Notification("success", "Edit", res.data.message);
@@ -97,22 +176,29 @@ const handleEdit = () => {
     });
 };
 const Reset = () => {
-  form.title = "";
-  form.cover = null;
-  form.coverUrl = "";
+  form.username = "";
+  form.book = "";
 };
 const HandleSubmit = () => {
   props.actionType == "A" ? HandleAdd() : handleEdit();
 };
 
 watch(
-  () => props.role,
+  () => props.borrow,
   (newVal) => {
     if (newVal) {
-      form.name = newVal.name;
+      form.username = newVal.user;
+      form.book = newVal.book;
+      form.status = newVal.status;
+      console.log(newVal);
     }
   }
 );
+
+onMounted(() => {
+  getUser();
+  getBook();
+});
 </script>
 
 <style lang="scss"></style>

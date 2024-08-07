@@ -22,4 +22,11 @@ export default {
     };
     return AXIOS.post("v1/auth/register", reqBody, config);
   },
+
+  getUser() {
+    const config = {
+      ...header.authHeader(),
+    };
+    return AXIOS.get("v1/user", config);
+  },
 };

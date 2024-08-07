@@ -18,13 +18,14 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::post('profile', [AuthController::class, 'profile'])->middleware('auth:api');
-
+    Route::get('user', [AuthController::class, 'users']);
     Route::apiResource('role', RoleController::class)->except(['show'])->middleware(['auth:api', 'owner']);
     Route::apiResource('category', CategoryController::class);
     Route::apiResource('book', BookController::class);
     Route::get('book/home', [ BookController::class,'home']);
     Route::apiResource('borrow', BorrowController::class);
     Route::post('check', [BorrowController::class, 'checkIfBorrowed']);
+    Route::post('borrow/admin', [BorrowController::class, 'storeAdmin'])->middleware('owner');
 
 });
 

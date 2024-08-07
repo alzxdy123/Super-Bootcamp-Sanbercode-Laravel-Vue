@@ -109,6 +109,10 @@ class AuthController extends Controller
         return response()->json(['data' => $profile], 200);
     }
     
-    
+    public function users() {
+        $users = User::all();
+
+        return response()->json(['data' => $users]);
+    }
     
 }

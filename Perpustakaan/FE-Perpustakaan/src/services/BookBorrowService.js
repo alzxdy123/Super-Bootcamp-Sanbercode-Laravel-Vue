@@ -38,4 +38,9 @@ export default {
     const config = { ...header.authHeader() };
     return AXIOS.post("v1/check", reqBody, config);
   },
+
+  AddAdmin(reqBody) {
+    const config = { ...header.authHeader() };
+    return AXIOS.post("v1/borrow/admin", reqBody, config);
+  },
 };
