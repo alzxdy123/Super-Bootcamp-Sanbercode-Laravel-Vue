@@ -38,18 +38,19 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if(!auth()->attempt($credentials)) {
-            return response()->json(['message' => 'The credentials you entered are incorrect || Kredensial yang anda masukkan salah'], 401);
+            return response()->json(['message' => 'Kredensial yang anda masukkan salah'], 401);
         }
 
         $user = User::where('email', $request->email)->first();
+        $role = Role::find($user->role_id);
+
         $customClaims = [
             'username' => $user->username,
             'email' => $user->email,
-            'role_id' => $user->role_id,
+            'role' => $role->name,
         ];
     
         $token = JWTAuth::claims($customClaims)->fromUser($user);
-        // $token = JWTAuth::fromUser($user);
 
         return response()->json(['token' => $token], 200);
     }
@@ -65,14 +66,14 @@ class AuthController extends Controller
     public function logout() {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out || Logout berhasil'], 200);
+        return response()->json(['message' => 'Logout berhasil'], 200);
     }
 
     public function profile(ProfileRequest $request) {
         $authUser = auth()->user();
     
         if (!$authUser) {
-            return response()->json(['message' => 'User not authenticated || Pengguna tidak terautentikasi'], 401);
+            return response()->json(['message' => 'Pengguna tidak terautentikasi'], 401);
         }
     
         $profile = Profile::where('user_id', $authUser->id)->first();

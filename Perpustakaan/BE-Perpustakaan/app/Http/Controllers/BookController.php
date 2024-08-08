@@ -6,6 +6,7 @@ use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class BookController extends Controller
 {
@@ -17,61 +18,51 @@ class BookController extends Controller
     public function index(Request $request)
     {
         $books = Book::with('category');
-
+    
         if($request->input('title')) {
             $books->where('title', 'like', '%'.$request->input('title').'%');
         }
-
+    
         if($request->input('status')) {
             $books->where('status', $request->input('status'));
         }
-
+    
         if($request->input('category_id')) {
             $books->where('category_id', $request->input('category_id'));
         }
-
+    
+        $books->orderBy('created_at', 'desc');
+    
         $books = $books->get();
-
+    
         if($books->isEmpty()) {
-            return response()->json(['message' => 'Book not found || Buku tidak ditemukan'], 404);
+            return response()->json(['message' => 'Buku tidak ditemukan'], 404);
         }
-
+    
         return response()->json(['data' => $books], 200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(BookRequest $request)
+     public function store(BookRequest $request)
     {
         $coverData = null;
 
         if($request->hasFile('cover')) {
-            $cover = $request->file('cover');
-            $coverName = time().'.'.$cover->extension();
-            $cover->storeAs('covers', $coverName, 'public');
-
-            $coverData = env('APP_URL').'/storage/covers/'.$coverName;
+            $uploadedFileUrl = Cloudinary::upload($request->file('cover')->getRealPath())->getSecurePath();
+            $coverData = $uploadedFileUrl;
         }
 
-        if($request->stok > 0) {
-             $request['status'] = "A";
-        } else {
-            $request['status'] = "N";
-        }
+        $request['status'] = $request->stok > 0 ? "A" : "N";
 
         $data = $request->all();
-        if($coverData) {
-            $data['cover'] = $coverData;
-        } else {
-            $data['cover'] = null;
-        }
+        $data['cover'] = $coverData;
 
         $book = Book::create($data);
 
-        return response()->json(['message' => 'Book created || Buku berhasil ditambahkan','data' => $book], 201);
+        return response()->json(['message' => 'Buku berhasil ditambahkan', 'data' => $book], 201);
     }
-
     /**
      * Display the specified resource.
      */
@@ -88,30 +79,25 @@ class BookController extends Controller
     public function update(BookRequest $request, Book $book)
     {
         $coverData = $book->cover;
-    
-        if ($request->hasFile('cover')) {
+
+        if($request->hasFile('cover')) {
             if ($coverData) {
-                Storage::disk('public')->delete('covers/' . basename($coverData));
+                $publicId = pathinfo($coverData, PATHINFO_FILENAME);
+                Cloudinary::destroy($publicId);
             }
-    
-            $cover = $request->file('cover');
-            $coverName = time().'.'.$cover->extension();
-            $coverPath = $cover->storeAs('covers', $coverName, 'public');
-            $coverData = env('APP_URL').'/storage/' . $coverPath;
+
+            $uploadedFileUrl = Cloudinary::upload($request->file('cover')->getRealPath())->getSecurePath();
+            $coverData = $uploadedFileUrl;
         }
 
-        if($request->stok > 0) {
-            $request['status'] = "A";
-       } else {
-           $request['status'] = "N";
-       }
-    
+        $request['status'] = $request->stok > 0 ? "A" : "N";
+
         $data = $request->all();
         $data['cover'] = $coverData;
-        
+
         $book->update($data);
-    
-        return response()->json(['message' => 'Book updated || Buku berhasil diperbarui', 'data' => $book], 200);
+
+        return response()->json(['message' => 'Buku berhasil diperbarui', 'data' => $book], 200);
     }
     
 
@@ -121,15 +107,13 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         if ($book->cover) {
-            $coverPath = 'covers/' . basename($book->cover);
-            if (Storage::disk('public')->exists($coverPath)) {
-                Storage::disk('public')->delete($coverPath);
-            }
+            $publicId = pathinfo($book->cover, PATHINFO_FILENAME);
+            Cloudinary::destroy($publicId);
         }
-
+    
         $book->delete();
 
-        return response()->json(['message' => 'Book deleted || Buku berhasil dihapus'], 200);
+        return response()->json(['message' => 'Buku berhasil dihapus'], 200);
     }
 
 

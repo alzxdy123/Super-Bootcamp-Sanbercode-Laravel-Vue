@@ -1,73 +1,76 @@
 <template>
-  <div class="wrapper">
-    <form @submit.prevent="Login()" class="box">
-      <div class="header">Login</div>
-      <div class="body">
-        <BFormGroup
-          id="input-group-1"
-          label="Email address:"
-          label-for="input-1"
-          class="form-group"
-          :class="errorMessage.error ? 'has-error' : ''"
-        >
-          <BFormInput
-            id="input-1"
-            v-model="form.email"
-            type="email"
-            placeholder="Enter email"
-            required
-          />
-          <div class="error" v-if="errorMessage.error">
-            {{ errorMessage.error }}
-          </div>
-        </BFormGroup>
-        <BFormGroup
-          id="input-group-2"
-          label="Password:"
-          label-for="input-2"
-          class="form-group"
-          :class="errorMessage.error ? 'has-error' : ''"
-        >
-          <BFormInput
-            id="input-2"
-            v-model="form.password"
-            type="password"
-            placeholder="Enter password"
-            required
-          />
-        </BFormGroup>
-        <div class="captcha-box">
-          <div class="captcha">
-            <span class="captcha-text">{{ captcha }} </span
-            ><i class="jam jam-refresh" @click="ReCaptcha()"></i>
-          </div>
+  <div style="background-color: #f2f2f2">
+    <div class="wrapper">
+      <div class="background"></div>
+      <form @submit.prevent="Login()" class="box">
+        <div class="header">Login</div>
+        <div class="body">
           <BFormGroup
+            id="input-group-1"
+            label="Email address:"
+            label-for="input-1"
             class="form-group"
-            :class="errorMessage.captcha ? 'has-error' : ''"
+            :class="errorMessage.error ? 'has-error' : ''"
           >
             <BFormInput
-              v-model="form.captcha"
-              type="text"
-              placeholder="Enter captcha"
+              id="input-1"
+              v-model="form.email"
+              type="email"
+              placeholder="Enter email"
               required
             />
-            <div class="error" v-if="errorMessage.captcha">
-              {{ errorMessage.captcha }}
+            <div class="error" v-if="errorMessage.error">
+              {{ errorMessage.error }}
             </div>
           </BFormGroup>
+          <BFormGroup
+            id="input-group-2"
+            label="Password:"
+            label-for="input-2"
+            class="form-group"
+            :class="errorMessage.error ? 'has-error' : ''"
+          >
+            <BFormInput
+              id="input-2"
+              v-model="form.password"
+              type="password"
+              placeholder="Enter password"
+              required
+            />
+          </BFormGroup>
+          <div class="captcha-box">
+            <div class="captcha">
+              <span class="captcha-text">{{ captcha }} </span
+              ><i class="jam jam-refresh" @click="ReCaptcha()"></i>
+            </div>
+            <BFormGroup
+              class="form-group"
+              :class="errorMessage.captcha ? 'has-error' : ''"
+            >
+              <BFormInput
+                v-model="form.captcha"
+                type="text"
+                placeholder="Enter captcha"
+                required
+              />
+              <div class="error" v-if="errorMessage.captcha">
+                {{ errorMessage.captcha }}
+              </div>
+            </BFormGroup>
+          </div>
         </div>
-      </div>
-      <div class="footer">
-        <button type="submit">
-          <BSpinner small v-if="isBusy" />
-          <span v-else>Login</span>
-        </button>
-        <p>
-          Dont have an account?
-          <RouterLink to="/register">Register</RouterLink>
-        </p>
-      </div>
-    </form>
+        <div class="footer">
+          <button type="submit">
+            <BSpinner small v-if="isBusy" />
+            <span v-else>Login</span>
+          </button>
+          <p>
+            Dont have an account?
+            <RouterLink to="/register">Register</RouterLink>
+          </p>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -118,7 +121,7 @@ const Login = () => {
 
         console.log(user.role_id);
 
-        if (user.role_id == "9cafd0ce-6535-4797-aced-42f455c88044") {
+        if (user.role == "owner") {
           userData.role = "owner";
         }
 

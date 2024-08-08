@@ -14,7 +14,7 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-        $categories = Category::query();
+        $categories = Category::with('list_books');
 
         if($request->input('name')) {
             $categories->where('name', 'like', '%'.$request->input('name').'%');

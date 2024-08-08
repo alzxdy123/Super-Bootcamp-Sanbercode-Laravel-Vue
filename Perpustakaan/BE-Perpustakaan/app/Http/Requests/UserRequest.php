@@ -32,18 +32,18 @@ class UserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'username.required' => 'Username is required || Username harus diisi',
-            'username.unique' => 'Username already exists || Username sudah ada',
-            'email.required' => 'Email is required || Email harus diisi',
-            'email.unique' => 'Email already exists || Email sudah ada',
-            'email.email' => 'Email must be a valid email address || Email harus berupa alamat email yang valid',
-            'email.dns' => 'Email must be a valid email address || Email harus berupa alamat email yang valid',
-            'email.rfc' => 'Email must be a valid email address || Email harus berupa alamat email yang valid',
-            'password.required' => 'Password is required || Kata sandi harus diisi',
-            'password.min' => 'Password must be at least 6 characters || Kata sandi harus minimal 6 karakter',
-            'password.confirmed' => 'Password and password confirmation must match || Kata sandi dan konfirmasi kata sandi harus sama',
-            'password_confirmation.required' => 'Password confirmation is required || Konfirmasi kata sandi harus diisi',
-            'password_confirmation.same' => 'Password and password confirmation must match || Kata sandi dan konfirmasi kata sandi harus sama',
+            'username.required' => 'Username harus diisi',
+            'username.unique' => 'Username sudah ada',
+            'email.required' => 'Email harus diisi',
+            'email.unique' => 'Email sudah ada',
+            'email.email' => 'Email harus berupa alamat email yang valid',
+            'email.dns' => 'Email harus berupa alamat email yang valid',
+            'email.rfc' => 'Email harus berupa alamat email yang valid',
+            'password.required' => 'Kata sandi harus diisi',
+            'password.min' => 'Kata sandi harus minimal 6 karakter',
+            'password.confirmed' => 'Kata sandi dan konfirmasi kata sandi harus sama',
+            'password_confirmation.required' => 'Konfirmasi kata sandi harus diisi',
+            'password_confirmation.same' => 'Kata sandi dan konfirmasi kata sandi harus sama',
         ];
     }
 }

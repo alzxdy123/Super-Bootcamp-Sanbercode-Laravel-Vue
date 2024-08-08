@@ -35,15 +35,15 @@ class BookRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'Title is required || Judul harus diisi',
-            'summary.required' => 'Summary is required || Ringkasan harus diisi',
+            'title.required' => ' Judul harus diisi',
+            'summary.required' => 'Ringkasan harus diisi',
             'stok.required' => 'Stok is required || Stok harus diisi',
-            'stok.numeric' => 'Stok must be a number || Stok harus berupa angka',
-            'cover.image' => 'Cover must be an image || Cover harus berupa gambar',
-            'cover.mimes' => 'Cover must be a file of type: jpeg, png, jpg, gif, svg. || Cover harus berupa file bertipe: jpeg, png, jpg, gif, svg',
-            'cover.max' => 'Cover must not be greater than 2MB. || Cover harus kurang dari 2MB',
-            'category_id.required' => 'Category is required',
-            'category_id.exists' => 'Category not found || Kategori tidak ditemukan',
+            'stok.numeric' => ' Stok harus berupa angka',
+            'cover.image' => 'Cover harus berupa gambar',
+            'cover.mimes' => 'Cover harus berupa file bertipe: jpeg, png, jpg, gif, svg',
+            'cover.max' => 'Cover harus kurang dari 2MB',
+            'category_id.required' => 'Kategori harus diisi',
+            'category_id.exists' => 'Kategori tidak ditemukan',
         ];
     }
 }

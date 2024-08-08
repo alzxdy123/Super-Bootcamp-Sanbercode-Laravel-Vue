@@ -2,7 +2,7 @@
   width: 1005;
   height: auto;
   min-height: 50vh;
-  background-color: #fff6f7;
+  background-color: #f2f2f2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,7 +69,7 @@
   .book-wrap {
     display: flex;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: center;
     gap: 80px;
 
     .book-card {

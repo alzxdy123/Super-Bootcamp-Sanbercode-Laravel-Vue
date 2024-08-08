@@ -17,6 +17,7 @@ import Role from "./components/private/role/Role.vue";
 import CaetegoryDetail from "./components/private/category/CaetegoryDetail.vue";
 import Borrow from "./components/private/borrow/Borrow.vue";
 import BorrowDetail from "./components/private/borrow/BorrowDetail.vue";
+import PublicBookDetail from "./components/public/PublicBookDetail.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
           component: PublicBook,
         },
         {
+          path: "/book/:id",
+          name: "bookDetail",
+          component: PublicBookDetail,
+        },
+        {
           path: "/category",
           name: "category",
           component: PublicCategory,
@@ -48,6 +54,7 @@ const router = createRouter({
     {
       path: "/dashboard",
       name: "dashboard",
+      redirect: "/dashboard/book",
       component: Dashboard,
       meta: {
         onlyOwner: true,

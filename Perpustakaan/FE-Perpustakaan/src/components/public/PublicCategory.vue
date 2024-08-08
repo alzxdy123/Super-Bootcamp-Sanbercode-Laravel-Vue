@@ -1,26 +1,31 @@
 <template>
   <div>
-    <div class="container mt-5">
-      <div class="category">
-        <BSpinner v-if="isBusy" style="width: 3rem; height: 3rem" />
-        <CategoryBox
-          v-else
-          v-for="category in categories"
-          :key="category.id"
-          :category="category"
-        />
+    <div v-if="isBusy" class="text-center">
+      <BSpinner />
+    </div>
+    <div v-else class="container mt-5">
+      <div
+        v-for="category in categories"
+        :key="category.id"
+        class="category-section"
+      >
+        <h3>{{ category.name }}</h3>
+        <div class="book-wrap" v-if="category.list_books">
+          <BookCard v-for="book in category.list_books" :book="book" />
+        </div>
+        <div v-else class="no-books">Belum ada buku di category ini</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
 import CategoryService from "@/services/CategoryService";
-import { onMounted, ref } from "vue";
-import CategoryBox from "../CategoryBox.vue";
+import BookCard from "../BookCard.vue";
 
 const isBusy = ref(false);
-const categories = ref();
+const categories = ref([]);
 
 const getCategory = () => {
   isBusy.value = true;
@@ -31,7 +36,8 @@ const getCategory = () => {
       categories.value = res.data.data;
     })
     .catch((err) => {
-      errorMessage.value = err.response.data.message;
+      isBusy.value = false;
+      console.log(err.response.data.message);
     });
 };
 
@@ -41,20 +47,29 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.category {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
+.category-section {
+  margin-bottom: 50px;
+  height: 540px;
 
-  .box {
-    min-width: 200px;
-    height: 100px;
+  h3 {
+    margin-bottom: 15px;
+  }
+
+  .book-wrap {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
-    white-space: normal;
+    gap: 15px;
+    padding-bottom: 10px;
+    height: auto;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .no-books {
+    font-size: 14px;
+    color: #888;
   }
 }
 </style>

@@ -7,33 +7,35 @@
         <BNavItem
           :class="$route.path == '/dashboard/book' ? 'active' : ''"
           @click="Functions.ToPage('/dashboard/book')"
-          >Book</BNavItem
+          >Buku</BNavItem
         >
         <BNavItem
           :class="$route.path == '/dashboard/borrow' ? 'active' : ''"
           @click="Functions.ToPage('/dashboard/borrow')"
-          >Borrow</BNavItem
+          >Pinjaman</BNavItem
         >
         <BNavItem
           :class="$route.path == '/dashboard/category' ? 'active' : ''"
           @click="Functions.ToPage('/dashboard/category')"
-          >Category</BNavItem
+          >Kategori</BNavItem
         >
         <BNavItem
           :class="$route.path == '/dashboard/role' ? 'active' : ''"
           @click="Functions.ToPage('/dashboard/role')"
           >Role</BNavItem
         >
-        <BNavItemDropdown text="Language" right>
+        <!-- <BNavItemDropdown text="Language" right>
           <BDropdownItem href="#">Indonesia</BDropdownItem>
           <BDropdownItem href="#">English</BDropdownItem>
-        </BNavItemDropdown>
+        </BNavItemDropdown> -->
         <BNavItemDropdown right>
           <template #button-content>
             <em>{{ user.username }}</em>
           </template>
-          <BDropdownItem href="#">Profile</BDropdownItem>
-          <BDropdownItem @click="Functions.ToPage('/home')">Home</BDropdownItem>
+          <!-- <BDropdownItem href="#">Profile</BDropdownItem> -->
+          <BDropdownItem @click="Functions.ToPage('/home')"
+            >Beranda</BDropdownItem
+          >
           <BDropdownItem @click="HandleLogout()">
             <BSpinner small v-if="isBusy" />
             <i v-else class="jam jam-power text-danger"></i>
@@ -50,28 +52,29 @@
         <BNavItem
           :class="$route.path == '/home' ? 'active' : ''"
           @click="Functions.ToPage('/home')"
-          >Home</BNavItem
+        >
+          Beranda</BNavItem
         >
         <BNavItem
           :class="$route.path == '/book' ? 'active' : ''"
           @click="Functions.ToPage('/book')"
-          >Book</BNavItem
+          >Buku</BNavItem
         >
         <BNavItem
           :class="$route.path == '/category' ? 'active' : ''"
           @click="Functions.ToPage('/category')"
-          >Category</BNavItem
+          >Kategori</BNavItem
         >
 
-        <BNavItemDropdown text="Language" right>
+        <!-- <BNavItemDropdown text="Language" right>
           <BDropdownItem href="#">Indonesia</BDropdownItem>
           <BDropdownItem href="#">English</BDropdownItem>
-        </BNavItemDropdown>
+        </BNavItemDropdown> -->
         <BNavItemDropdown right>
           <template #button-content>
             <em>{{ user.username }}</em>
           </template>
-          <BDropdownItem href="#">Profile</BDropdownItem>
+          <!-- <BDropdownItem href="#">Profile</BDropdownItem> -->
           <BDropdownItem
             @click="Functions.ToPage('/dashboard')"
             v-if="user.role == 'owner'"

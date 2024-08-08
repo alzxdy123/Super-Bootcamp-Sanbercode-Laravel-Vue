@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <form class="box" @submit.prevent="Register()">
-      <div class="header">Register</div>
+      <div class="header mt-3">Register</div>
       <div class="body">
         <BFormGroup
           label="Username:"
