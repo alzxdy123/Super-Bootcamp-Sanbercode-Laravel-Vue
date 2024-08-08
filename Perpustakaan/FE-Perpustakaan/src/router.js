@@ -133,19 +133,18 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ["/login", "/register"];
-  const authRequired = !publicPages.includes(to.path);
+  // const publicPages = ["/login", "/register"];
+  // const authRequired = !publicPages.includes(to.path);
 
+  // if (authRequired && token == null) {
+  //   return next({
+  //     path: "/login",
+  //     query: {
+  //       returnUrl: to.path,
+  //     },
+  //   });
+  // }
   let token = localStorage.getItem("token");
-
-  if (authRequired && token == null) {
-    return next({
-      path: "/login",
-      query: {
-        returnUrl: to.path,
-      },
-    });
-  }
 
   if (token != null && to.path == "/login") {
     Functions.Notification("error", "Error", "Anda sudah login");

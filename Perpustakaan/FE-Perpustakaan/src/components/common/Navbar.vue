@@ -45,9 +45,9 @@
       </BNavbarNav>
     </BCollapse>
     <BCollapse id="nav-collapse" is-nav v-else>
-      <BNavForm class="d-flex">
+      <!-- <BNavForm class="d-flex">
         <BFormInput class="me-2" placeholder="Search" v-model="inputSearch" />
-      </BNavForm>
+      </BNavForm> -->
       <BNavbarNav class="ms-auto mb-2 mb-lg-0 gap-3">
         <BNavItem
           :class="$route.path == '/home' ? 'active' : ''"
@@ -72,18 +72,22 @@
         </BNavItemDropdown> -->
         <BNavItemDropdown right>
           <template #button-content>
-            <em>{{ user.username }}</em>
+            <em v-if="token">{{ user.username }}</em>
+            <span v-else>Login</span>
           </template>
           <!-- <BDropdownItem href="#">Profile</BDropdownItem> -->
           <BDropdownItem
             @click="Functions.ToPage('/dashboard')"
-            v-if="user.role == 'owner'"
+            v-if="token && user.role == 'owner'"
             >Dashboard</BDropdownItem
           >
-          <BDropdownItem @click="HandleLogout()">
+          <BDropdownItem @click="HandleLogout()" v-if="token">
             <BSpinner small v-if="isBusy" />
-            <i v-else class="jam jam-power text-danger"></i>
+            <i class="jam jam-power text-danger"></i>
             Log Out</BDropdownItem
+          >
+          <BDropdownItem @click="Functions.ToPage('/login')" v-if="!token">
+            Log In</BDropdownItem
           >
         </BNavItemDropdown>
       </BNavbarNav>
@@ -105,6 +109,7 @@ const props = defineProps({
   },
 });
 const isBusy = ref(false);
+const token = localStorage.getItem("token");
 const HandleLogout = () => {
   isBusy.value = true;
   // Functions.Notification("warn", "Logout", "Loging out...");
