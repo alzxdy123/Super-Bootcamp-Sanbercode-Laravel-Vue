@@ -81,8 +81,8 @@ import { jwtDecode } from "jwt-decode";
 import { ref, reactive, computed, onMounted } from "vue";
 
 const form = reactive({
-  email: "owner@gmail.com",
-  password: "Owner123#",
+  email: "",
+  password: "",
   captcha: "",
 });
 
@@ -146,7 +146,6 @@ const ReCaptcha = () => {
 
 onMounted(() => {
   captcha.value = Functions.GenerateCaptcha(4);
-  form.captcha = captcha.value;
 });
 </script>
 
