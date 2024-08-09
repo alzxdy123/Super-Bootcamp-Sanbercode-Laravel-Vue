@@ -106,6 +106,11 @@ const getCategories = () => {
     })
     .catch((err) => {
       console.log(err);
+
+      isBusy.value = false;
+      if (categories.value.lengthb < 0) {
+        errorMessage.value = "data not found";
+      }
     });
 };
 

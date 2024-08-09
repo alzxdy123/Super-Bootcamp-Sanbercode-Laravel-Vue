@@ -20,6 +20,8 @@ class CategoryController extends Controller
             $categories->where('name', 'like', '%'.$request->input('name').'%');
         }
 
+        $categories->orderBy('created_at', 'desc');
+
         $categories = $categories->get();
 
         return response()->json(['data' => $categories], 200);
@@ -41,7 +43,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         if(!$category) {
-            return response()->json(['message' => 'Category not found || Kategori tidak ditemukan'], 404);
+            return response()->json(['message' => 'Kategori tidak ditemukan'], 404);
         }
 
         $category = Category::with('list_books.category')->find($category->id);
@@ -56,7 +58,7 @@ class CategoryController extends Controller
     {
         $category->update($request->all());
 
-        return response()->json(['message' => 'Category updated || Kategori berhasil diperbarui'], 200);
+        return response()->json(['message' => 'Kategori berhasil diperbarui'], 200);
     }
 
     /**
@@ -66,6 +68,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return response()->json(['message' => 'Category deleted || Kategori berhasil dihapus'], 200);
+        return response()->json(['message' => 'Kategori berhasil dihapus'], 200);
     }
 }

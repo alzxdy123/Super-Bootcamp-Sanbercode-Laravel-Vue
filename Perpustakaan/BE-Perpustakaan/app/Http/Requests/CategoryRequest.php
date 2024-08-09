@@ -31,10 +31,10 @@ class CategoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Category name is required || Nama kategori harus diisi',
-            'name.string' => 'Category name must be a string || Nama kategori harus berupa teks',
-            'name.max' => 'Category name may not be greater than 255 characters || Nama kategori tidak boleh lebih dari 255 karakter',
-            'name.unique' => 'Category name already exists || Nama kategori sudah ada',
+            'name.required' => 'Nama kategori harus diisi',
+            'name.string' => 'Nama kategori harus berupa teks',
+            'name.max' => 'Nama kategori tidak boleh lebih dari 255 karakter',
+            'name.unique' => 'Nama kategori sudah ada',
         ];
     }
 }

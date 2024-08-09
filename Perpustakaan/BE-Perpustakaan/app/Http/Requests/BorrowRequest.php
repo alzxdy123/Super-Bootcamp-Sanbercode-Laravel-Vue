@@ -42,15 +42,15 @@ class BorrowRequest extends FormRequest
     public function messages()
     {
         return [
-            'tanggal_pinjam.required' => 'The borrow date is required || Tanggal pinjam harus diisi',
-            'tanggal_pinjam.date' => 'The borrow date must be a valid date || Tanggal pinjam harus berupa tanggal yang valid',
-            'tanggal_kembali.required' => 'The return date is required || Tanggal kembali harus diisi',
-            'tanggal_kembali.date' => 'The return date must be a valid date || Tanggal kembali harus berupa tanggal yang valid',
-            'status.string' => 'The status must be a string || Status harus berupa string',
-            'book_id.exists' => 'The book with the given ID does not exist || Buku dengan ID tersebut tidak ditemukan',
-            'book_id.unique' => 'You cannot borrow the same book more than once || Anda tidak bisa meminjam buku yang sama lebih dari sekali',
-            'user_id.required' => 'The user ID is required || ID pengguna harus diisi',
-            'user_id.exists' => 'The user with the given ID does not exist || Pengguna dengan ID tersebut tidak ditemukan',
+            'tanggal_pinjam.required' => 'Tanggal pinjam harus diisi',
+            'tanggal_pinjam.date' => 'Tanggal pinjam harus berupa tanggal yang valid',
+            'tanggal_kembali.required' => 'Tanggal kembali harus diisi',
+            'tanggal_kembali.date' => 'Tanggal kembali harus berupa tanggal yang valid',
+            'status.string' => 'Status harus berupa string',
+            'book_id.exists' => 'Buku dengan ID tersebut tidak ditemukan',
+            'book_id.unique' => 'Anda tidak bisa meminjam buku yang sama lebih dari sekali',
+            'user_id.required' => 'ID pengguna harus diisi',
+            'user_id.exists' => 'Pengguna dengan ID tersebut tidak ditemukan',
         ];
     }
 }

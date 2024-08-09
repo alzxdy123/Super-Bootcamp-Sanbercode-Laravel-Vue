@@ -31,7 +31,7 @@ class RoleController extends Controller
     {
         Role::create($request->all());
 
-        return response()->json(['message' => 'Role created || Role berhasil dibuat'], 201);
+        return response()->json(['message' => 'Role berhasil dibuat'], 201);
     }
 
     /**
@@ -49,7 +49,7 @@ class RoleController extends Controller
     {
         $role->update($request->all());
 
-        return response()->json(['message' => 'Role updated || Role berhasil diperbarui'], 200);
+        return response()->json(['message' => 'Role berhasil diperbarui'], 200);
     }
 
     /**
@@ -59,6 +59,6 @@ class RoleController extends Controller
     {
         $role->delete();
 
-        return response()->json(['message' => 'Role deleted || Role berhasil dihapus'], 200);
+        return response()->json(['message' => 'Role berhasil dihapus'], 200);
     }
 }

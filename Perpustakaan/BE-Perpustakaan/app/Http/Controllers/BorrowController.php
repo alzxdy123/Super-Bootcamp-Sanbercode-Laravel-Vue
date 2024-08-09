@@ -88,7 +88,7 @@ class BorrowController extends Controller
             // Cek apakah pengguna sudah meminjam buku yang sama
             if ($existingBorrow) {
                 $response = response()->json([
-                    'message' => 'User cannot borrow the same book more than once || Pengguna tidak bisa meminjam buku yang sama lebih dari sekali'
+                    'message' => 'Pengguna tidak bisa meminjam buku yang sama lebih dari sekali'
                 ], 400);
                 return;
             }
@@ -117,7 +117,7 @@ class BorrowController extends Controller
             ]);
 
             $response = response()->json([
-                'message' => 'Borrow book created successfully || Peminjaman buku berhasil',
+                'message' => 'Peminjaman buku berhasil',
                 'borrow' => $borrow
             ], 201);
         });
@@ -144,7 +144,7 @@ class BorrowController extends Controller
                 // Cek apakah pengguna sudah meminjam buku yang sama
                 if ($existingBorrow) {
                     $response = response()->json([
-                        'message' => 'User cannot borrow the same book more than once || Pengguna tidak bisa meminjam buku yang sama lebih dari sekali'
+                        'message' => 'Pengguna tidak bisa meminjam buku yang sama lebih dari sekali'
                     ], 400);
                     return;
                 }
@@ -173,7 +173,7 @@ class BorrowController extends Controller
                 ]);
     
                 $response = response()->json([
-                    'message' => 'Borrow book created successfully || Peminjaman buku berhasil',
+                    'message' => 'Peminjaman buku berhasil',
                     'borrow' => $borrow
                 ], 201);
             });
@@ -204,10 +204,10 @@ class BorrowController extends Controller
                 $borrow->update($request->all());
             });
     
-            return response()->json(['message' => 'Borrow updated successfully || Peminjaman diperbarui'], 200);
+            return response()->json(['message' => 'Peminjaman diperbarui'], 200);
     
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to update borrow || Gagal memperbarui peminjaman'], 400);
+            return response()->json(['message' => 'Gagal memperbarui peminjaman'], 400);
         }
     }
 
@@ -224,10 +224,10 @@ class BorrowController extends Controller
                 $borrow->delete();
             });
     
-            return response()->json(['message' => 'Borrow deleted successfully || Peminjaman dihapus'], 200);
+            return response()->json(['message' => 'Peminjaman dihapus'], 200);
     
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to delete borrow || Gagal menghapus peminjaman'], 400);
+            return response()->json(['message' => 'Gagal menghapus peminjaman'], 400);
         }
     }
 
