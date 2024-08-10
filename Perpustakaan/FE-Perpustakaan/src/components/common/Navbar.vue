@@ -115,6 +115,7 @@ const HandleLogout = () => {
   // Functions.Notification("warn", "Logout", "Loging out...");
   localStorage.clear();
   Functions.ToPage("/");
+  window.location.reload();
   // AuthService.Logout()
   //   .then(() => {
   //     isBusy.value = false;
