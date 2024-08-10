@@ -129,7 +129,7 @@ const HandleDelete = (category) => {
   isBusy.value = true;
   CategoryService.Delete(category.id)
     .then((res) => {
-      isBusyTable.value = false;
+      isBusy.value = false;
       Functions.Notification("success", "Delete Category", res.data.message);
       getCategories();
     })
