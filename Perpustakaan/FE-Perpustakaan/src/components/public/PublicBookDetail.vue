@@ -73,8 +73,13 @@ const getBook = () => {
 const isBusyBorrow = ref(false);
 
 const checkBorrow = () => {
+  const reqBody = {
+    book_id: id,
+    username: user.username,
+  };
+
   isBusyBorrow.value = true;
-  BookBorrowService.Check(id)
+  BookBorrowService.Check(reqBody)
     .then((res) => {
       isBusyBorrow.value = false;
       canBorrow.value = res.data.data;
