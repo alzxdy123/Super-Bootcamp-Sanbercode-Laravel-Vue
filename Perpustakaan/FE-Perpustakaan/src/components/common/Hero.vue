@@ -13,7 +13,7 @@
               Aplikasi Perpustakaan Online. dengan peminjaman buku dan
               pengembalian tanpa ribet
             </p>
-            <button>button</button>
+            <button @click="Functions.ToPage('/book')">List Buku</button>
           </div>
         </BCol>
         <BCol lg="6" sm="12" class="d-none d-lg-block">
@@ -25,7 +25,8 @@
 </template>
 
 <script setup>
-import bgHero from "@/assets/images/bg-hero.jpg";
+import bgHero from "@/assets/images/bg-hero.png";
+import Functions from "@/tools/Functions";
 </script>
 
 <style lang="scss">

@@ -100,6 +100,7 @@ const Borrow = () => {
     .then((res) => {
       isBusy.value = false;
       canBorrow.value = false;
+      Functions.Notification("success", "Borrow", "Buku Berhasil");
       console.log(res);
     })
     .catch((err) => {
