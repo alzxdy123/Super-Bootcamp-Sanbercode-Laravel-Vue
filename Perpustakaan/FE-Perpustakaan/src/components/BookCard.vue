@@ -19,7 +19,7 @@
         <button class="btn-detail" @click="handleDetail()">
           <span>Detail</span>
         </button>
-        <button class="btn-borrow" @click="Borrow()">
+        <button v-if="token" class="btn-borrow" @click="Borrow()">
           <BSpinner v-if="isBusy" small></BSpinner>
           <span v-else>Pinjam</span>
         </button>
@@ -34,6 +34,7 @@ import Functions from "@/tools/Functions";
 import { onMounted, ref } from "vue";
 
 const isBusy = ref(false);
+const token = localStorage.getItem("token");
 
 const props = defineProps({
   book: Object,

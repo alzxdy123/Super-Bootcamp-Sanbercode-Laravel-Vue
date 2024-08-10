@@ -21,7 +21,12 @@
         </p>
         <p class="summary">{{ book.summary }}</p>
         <div class="btn-container">
-          <button class="btn-borrow" @click="Borrow()" :disabled="canBorrow">
+          <button
+            class="btn-borrow"
+            v-if="token"
+            @click="Borrow()"
+            :disabled="canBorrow"
+          >
             <BSpinner v-if="isBusyBorrow" small></BSpinner>
             <span v-else>Pinjam</span>
           </button>
@@ -105,6 +110,7 @@ const Borrow = () => {
 
 const router = useRouter();
 const user = Functions.ReadSessionCustom("user");
+const token = localStorage.getItem("token");
 
 const back = () => {
   router.go(-1);
@@ -113,6 +119,10 @@ const back = () => {
 onMounted(() => {
   getBook();
   checkBorrow();
+
+  if (!token) {
+    user.value = null;
+  }
 });
 </script>
 

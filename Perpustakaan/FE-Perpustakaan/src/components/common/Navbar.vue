@@ -29,7 +29,7 @@
           <BDropdownItem href="#">English</BDropdownItem>
         </BNavItemDropdown> -->
         <BNavItemDropdown right>
-          <template #button-content>
+          <template v-if="token" #button-content>
             <em>{{ user.username }}</em>
           </template>
           <!-- <BDropdownItem href="#">Profile</BDropdownItem> -->
@@ -114,7 +114,7 @@ const HandleLogout = () => {
   isBusy.value = true;
   // Functions.Notification("warn", "Logout", "Loging out...");
   localStorage.clear();
-  Functions.ToPage("/login");
+  Functions.ToPage("/");
   // AuthService.Logout()
   //   .then(() => {
   //     isBusy.value = false;
