@@ -17,8 +17,7 @@
     <div class="actions">
       <div class="buttons">
         <button class="btn-detail" @click="handleDetail()">
-          <BSpinner v-if="isBusy" small></BSpinner>
-          <span v-else>Detail</span>
+          <span>Detail</span>
         </button>
         <button class="btn-borrow" @click="Borrow()">
           <BSpinner v-if="isBusy" small></BSpinner>
@@ -32,7 +31,7 @@
 <script setup>
 import BookBorrowService from "@/services/BookBorrowService";
 import Functions from "@/tools/Functions";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 const isBusy = ref(false);
 
@@ -45,7 +44,10 @@ const Borrow = () => {
 
   const reqBody = {
     book_id: props.book.id,
+    username: user.username,
   };
+
+  console.log(reqBody);
 
   BookBorrowService.Add(reqBody)
     .then((res) => {
@@ -62,6 +64,9 @@ const Borrow = () => {
 const handleDetail = () => {
   Functions.ToPage("/book/" + props.book.id);
 };
+
+const user = Functions.ReadSessionCustom("user");
+// console.log("🚀 ~ user:", user);
 </script>
 
 <style lang="scss" scoped>
