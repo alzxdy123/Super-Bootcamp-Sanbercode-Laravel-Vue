@@ -154,7 +154,7 @@ router.beforeEach((to, from, next) => {
   // }
   let token = localStorage.getItem("token");
 
-  if (token == null && to.meta.authRequired) {
+  if (!token && to.meta.authRequired) {
     return next({
       path: "/",
       query: {
