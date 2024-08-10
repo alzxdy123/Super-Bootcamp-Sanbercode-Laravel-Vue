@@ -21,21 +21,11 @@
         </p>
         <p class="summary">{{ book.summary }}</p>
         <div class="btn-container">
-          <button
-            class="btn-borrow"
-            @click="Borrow()"
-            :disabled="!canBorrow || book.status === 'N'"
-          >
+          <button class="btn-borrow" @click="Borrow()" :disabled="canBorrow">
             <BSpinner v-if="isBusyBorrow" small></BSpinner>
             <span v-else>Pinjam</span>
           </button>
-          <button
-            class="btn-back"
-            @click="back()"
-            :disabled="!canBorrow || book.status === 'N'"
-          >
-            Kembali
-          </button>
+          <button class="btn-back" @click="back()">Kembali</button>
         </div>
       </div>
     </div>
@@ -45,7 +35,7 @@
 <script setup>
 import BookService from "@/services/BookService";
 import BookBorrowService from "@/services/BookBorrowService";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import Functions from "@/tools/Functions";
 
@@ -82,7 +72,7 @@ const checkBorrow = () => {
   BookBorrowService.Check(reqBody)
     .then((res) => {
       isBusyBorrow.value = false;
-      canBorrow.value = res.data.data;
+      canBorrow.value = res.data.isBorrowed;
     })
     .catch((err) => {
       console.log(err);
@@ -90,18 +80,21 @@ const checkBorrow = () => {
 };
 
 const Borrow = () => {
-  isBusy.value = true;
+  isBusyBorrow.value = true;
 
   const reqBody = {
     book_id: book.value.id,
+    username: user.username,
   };
 
   BookBorrowService.Add(reqBody)
     .then((res) => {
-      isBusy.value = false;
+      isBusyBorrow.value = false;
       canBorrow.value = false;
       Functions.Notification("success", "Borrow", "Buku Berhasil");
       console.log(res);
+
+      checkBorrow();
     })
     .catch((err) => {
       isBusy.value = false;
