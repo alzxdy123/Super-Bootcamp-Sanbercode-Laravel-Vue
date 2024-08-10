@@ -6,10 +6,6 @@
     <div class="container" v-if="borrow">
       <section class="header">
         <h3>Borrow Detail</h3>
-        <div class="action">
-          <button>Edit</button>
-          <button>Delete</button>
-        </div>
       </section>
       <section>
         <div>

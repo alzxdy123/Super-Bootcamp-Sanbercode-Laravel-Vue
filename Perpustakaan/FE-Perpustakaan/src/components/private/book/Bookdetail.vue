@@ -15,12 +15,6 @@
     </div>
     <div class="container footer">
       <button @click="Functions.ToPage('/dashboard/book')">Back</button>
-      <div class="action">
-        <button @click="Functions.ToPage('/dashboard/book/edit')">Edit</button>
-        <button @click="Functions.ToPage('/dashboard/book/edit')">
-          Delete
-        </button>
-      </div>
     </div>
   </div>
 </template>

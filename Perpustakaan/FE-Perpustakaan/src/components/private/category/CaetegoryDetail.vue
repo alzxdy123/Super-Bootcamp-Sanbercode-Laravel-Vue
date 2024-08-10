@@ -4,15 +4,6 @@
       <section class="d-flex justify-content-between">
         <BSpinner v-if="isBusy" />
         <h3 v-else>{{ category.name }}</h3>
-
-        <div class="action">
-          <button @click="Functions.ToPage('/dashboard/category/edit')">
-            Edit
-          </button>
-          <button @click="Functions.ToPage('/dashboard/category/edit')">
-            Delete
-          </button>
-        </div>
       </section>
     </BContainer>
     <BContainer
