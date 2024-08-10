@@ -58,6 +58,7 @@ const router = createRouter({
       component: Dashboard,
       meta: {
         onlyOwner: true,
+        authRequired: true,
       },
       children: [
         {
@@ -66,6 +67,7 @@ const router = createRouter({
           component: Book,
           meta: {
             onlyOwner: true,
+            authRequired: true,
           },
         },
         {
@@ -74,6 +76,7 @@ const router = createRouter({
           component: Bookdetail,
           meta: {
             onlyOwner: true,
+            authRequired: true,
           },
         },
         {
@@ -82,6 +85,7 @@ const router = createRouter({
           component: Category,
           meta: {
             onlyOwner: true,
+            authRequired: true,
           },
         },
         {
@@ -90,6 +94,7 @@ const router = createRouter({
           component: CaetegoryDetail,
           meta: {
             onlyOwner: true,
+            authRequired: true,
           },
         },
         {
@@ -98,6 +103,7 @@ const router = createRouter({
           component: Role,
           meta: {
             onlyOwner: true,
+            authRequired: true,
           },
         },
         {
@@ -106,6 +112,7 @@ const router = createRouter({
           component: Borrow,
           meta: {
             onlyOwner: true,
+            authRequired: true,
           },
         },
         {
@@ -114,6 +121,7 @@ const router = createRouter({
           component: BorrowDetail,
           meta: {
             onlyOwner: true,
+            authRequired: true,
           },
         },
       ],
@@ -145,6 +153,15 @@ router.beforeEach((to, from, next) => {
   //   });
   // }
   let token = localStorage.getItem("token");
+
+  if (token == null && to.meta.authRequired) {
+    return next({
+      path: "/",
+      query: {
+        returnUrl: to.path,
+      },
+    });
+  }
 
   if (token != null && to.path == "/login") {
     Functions.Notification("error", "Error", "Anda sudah login");
