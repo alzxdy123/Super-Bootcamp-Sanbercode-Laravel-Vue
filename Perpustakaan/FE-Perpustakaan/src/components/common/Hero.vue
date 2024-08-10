@@ -17,14 +17,16 @@
           </div>
         </BCol>
         <BCol lg="6" sm="12" class="d-none d-lg-block">
-          <div class="image">image</div>
+          <img :src="bgHero" alt="" />
         </BCol>
       </BRow>
     </BContainer>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import bgHero from "@/assets/images/bg-hero.jpg";
+</script>
 
 <style lang="scss">
 @import "@/assets/scss/home.scss";
