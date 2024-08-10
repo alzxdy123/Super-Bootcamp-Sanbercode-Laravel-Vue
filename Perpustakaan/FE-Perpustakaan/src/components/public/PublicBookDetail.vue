@@ -111,6 +111,7 @@ const Borrow = () => {
 };
 
 const router = useRouter();
+const user = Functions.ReadSessionCustom("user");
 
 const back = () => {
   router.go(-1);
