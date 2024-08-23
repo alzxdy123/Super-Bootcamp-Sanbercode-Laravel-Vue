@@ -6,7 +6,8 @@
     "project": "Proyek",
     "skill": "Keterampilan",
     "light": "Terang",
-    "dark": "Gelap"
+    "dark": "Gelap",
+    "theme": "Tema"
   },
 
   "about": {
@@ -63,6 +64,47 @@
     "additional": {
       "title": "Kemampuan Tambahan",
       "item1": "Pemecahan Masalah: Keterampilan analitis dan pemecahan masalah yang kuat untuk menangani tantangan kompleks secara efektif."
+    }
+  },
+
+  "ibb-admin": {
+    "subTitle": "Proyek saya di PT. Sarana Pactindo",
+    "summary": "Sebagai Front-end Developer, saya berpartisipasi dalam pengembangan aplikasi admin untuk Bank Mandiri Taspen KALSEL Ibb Admin. Bekerja sama dengan dua anggota tim lainnya, saya bertanggung jawab mengimplementasikan berbagai fitur yang diperintahkan melalui dokumentasi",
+    "desc": "IBB Admin adalah aplikasi web admin yang digunakan oleh Bank Mandiri Taspen KALSEL untuk mengelola berbagai aktivitas internal perusahaan. Aplikasi ini dirancang untuk meningkatkan efisiensi operasional, membantu dalam pengambilan keputusan, serta memudahkan pengelolaan data dalam organisasi.",
+    "desc1": "IBB Admin adalah aplikasi web admin yang digunakan oleh Bank Mandiri Taspen KALSEL untuk mengelola berbagai aktivitas internal perusahaan.",
+    "feature": "Fitur",
+
+    "features": {
+      "item1": "Mengimplementasikan fitur login dengan dukungan terjemahan (bahasa Indonesia dan Inggris)",
+      "item2": "Membangun dashboard interaktif dengan visualisasi data perusahaan",
+      "item3": "Mengimplementasikan fitur CRUD untuk daftar perusahaan, memungkinkan pengelolaan data perusahaan secara efisien.",
+      "item4": "Menerapkan fitur penerimaan dan penerimaan hari libur kepada seluruh karyawan",
+      "item5": "Mengimplementasikan fitur CRUD gambar banner untuk carousel pada halaman web lain, memberikan fleksibilitas dalam pengelolaan konten promosi."
+    },
+    "alert": "Proyek ini bukan untuk publik. Itu hanya untuk internal.",
+    "tools": "Alat dan Teknologi"
+  },
+
+  "ibb-va": {
+    "subTitle": "Proyek saya di PT. Sarana Pactindo",
+    "summary": "Sebagai Front-end Developer, saya berpartisipasi dalam pengembangan aplikasi daftar virtualaccount pada bank Mandiri Taspen KALSEL, Aplikasi ini dirancang untuk membantu pengelolaan transaksi dan data perusahaan dengan lebih efisien",
+    "desc": "Aplikasi ini dirancang untuk membantu pengelolaan transaksi dan data perusahaan dengan lebih efisien. Aplikasi ini ditujukan untuk Bank Mandiri Taspen KALSEL.",
+    "feature": "Fitur",
+
+    "features": {
+      "item1": "Mengimplementasikan fitur login dengan dukungan terjemahan (bahasa Indonesia dan Inggris)",
+      "item2": "Membangun dashboard interaktif dengan visualisasi chart yang efektif, membantu pengguna dalam menganalisis data dengan cepat.",
+      "item3": "Memasukan data laporan pemasukan DANA ke tabel yg interaktif",
+      "item4": "Mengimplementasikan fitur filter transaksi, memungkinkan pengguna untuk mencari danmenyaring data dengan mudah.",
+      "item5": "Menyediakan fitur ekspor dan unduh data dalam format EXCEL dan PDF, memudahkanpengguna dalam memproses dan menyimpan laporan."
+    },
+    "alert": "This project is not for public use. It is only for internal use.",
+    "tools": "Tools & Tech",
+    "output": "Hasil",
+    "outputs": {
+      "item1": "Berhasil mengimplementasikan semua API yang ditugaskan, memastikan integrasi backenddan frontend berjalan lancar.",
+      "item2": "Membangun tampilan yang responsif dan rapi, memberikan pengalaman pengguna yangoptimal di berbagai perangkat.",
+      "item3": "Kolaborasi tim yang efektif dan positif, yang memungkinkan proyek diselesaikan tepat waktudengan hasil yang memuaskan."
     }
   }
 }

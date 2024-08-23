@@ -6,7 +6,8 @@
     "project": "Project",
     "skill": "Skill",
     "light": "Light",
-    "dark": "Dark"
+    "dark": "Dark",
+    "theme": "Theme"
   },
 
   "about": {
@@ -63,6 +64,47 @@
     "additional": {
       "title": "Additional Skills",
       "item1": "Problem-Solving: Strong analytical and problem-solving skills to tackle complex challenges effectively."
+    }
+  },
+
+  "ibb-admin": {
+    "subTitle": "My Project In PT. Sarana Pactindo",
+    "summary": "As a Front-end Developer, I participated in the development of the admin application for Bank Mandiri Taspen KALSEL Ibb Admin. Collaborating with two other team members, I was responsible for implementing various features as instructed through the API documentation.",
+    "desc": "IBB Admin is a web-based admin application used by Bank Mandiri Taspen KALSEL to manage various internal company activities. The application is designed to improve operational efficiency, assist in decision-making, and simplify data management within the organization.",
+    "desc1": "IBB Admin is a web-based admin application used by Bank Mandiri Taspen KALSEL to manage various internal company activities.",
+    "feature": "Feature",
+
+    "features": {
+      "item1": "Implemented a login feature with support for translations (Indonesian and English).",
+      "item2": "Built an interactive dashboard with data visualization for companies.",
+      "item3": "Implemented CRUD features for the company list, enabling efficient company data management.",
+      "item4": "Applied a holiday reception feature for all employees.",
+      "item5": "Implemented CRUD features for banner images in the carousel on another webpage, providing flexibility in managing promotional content."
+    },
+    "alert": "This project is not for public use. It is only for internal use.",
+    "tools": "Tools & Tech"
+  },
+
+  "ibb-va": {
+    "subTitle": "My Project In PT. Sarana Pactindo",
+    "summary": "As a Front-end Developer, I participated in the development of the virtual account application for Bank Mandiri Taspen KALSEL. This application was designed to help manage transactions and company data more efficiently.",
+    "desc": "Mandiri Virtual Account is a web-based application developed for Bank Mandiri Taspen KALSEL, designed to facilitate virtual account management.",
+    "feature": "Feature",
+
+    "features": {
+      "item1": "Implemented the login feature and page with a forgot password function.",
+      "item2": "Built an interactive dashboard with effective chart visualizations, helping users quickly analyze data.",
+      "item3": "Developed a transaction filter feature, allowing users to search and filter data easily.",
+      "item4": "Integrated DANA income report data into an interactive table.",
+      "item5": "Provided export and download functionality in EXCEL and PDF formats, enabling users to process and store reports with ease."
+    },
+    "alert": "This project is not for public use. It is only for internal use.",
+    "tools": "Tools & Tech",
+    "output": "Output",
+    "outputs": {
+      "item1": "Successfully implemented all assigned APIs, ensuring smooth integration between the backend and frontend.",
+      "item2": "Developed a responsive and clean UI, providing an optimal user experience across various devices.",
+      "item3": "Fostered effective and positive team collaboration, enabling the project to be completed on time with satisfying results."
     }
   }
 }

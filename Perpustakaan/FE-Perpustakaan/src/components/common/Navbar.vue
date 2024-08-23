@@ -19,11 +19,11 @@
           @click="Functions.ToPage('/dashboard/category')"
           >Kategori</BNavItem
         >
-        <BNavItem
+        <!-- <BNavItem
           :class="$route.path == '/dashboard/role' ? 'active' : ''"
           @click="Functions.ToPage('/dashboard/role')"
           >Role</BNavItem
-        >
+        > -->
         <!-- <BNavItemDropdown text="Language" right>
           <BDropdownItem href="#">Indonesia</BDropdownItem>
           <BDropdownItem href="#">English</BDropdownItem>

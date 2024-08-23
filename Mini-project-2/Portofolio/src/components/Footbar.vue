@@ -10,7 +10,7 @@
         class="flex justify-center lg:justify-start items-center hover:bg-slate-200 w-10 p-1 rounded-full cursor-pointer hover:scale-110"
         :class="{
           ' bg-gradient-to-r from-primary to-secondary dark:text-black text-white':
-            $route.path == list.url,
+            $route.path == list.url || $route.path == list.detail,
         }"
       >
         <i class="font-extrabold text-xl" :class="list.icon"></i>
@@ -91,6 +91,7 @@ const link = ref([
   {
     url: "/project",
     icon: "jam jam-layout",
+    detail: ["/project/ibb-admin"],
   },
   {
     url: "/skill",

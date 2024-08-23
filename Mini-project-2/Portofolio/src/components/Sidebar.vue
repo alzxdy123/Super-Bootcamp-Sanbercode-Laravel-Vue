@@ -9,7 +9,7 @@
         class="flex justify-center lg:justify-start items-center gap-3 p-3 mb-5 rounded-md cursor-pointer hover:scale-110 hover:bg-slate-200 lg:w-auto lg:mr-auto hover:dark:bg-slate-900"
         :class="{
           ' bg-gradient-to-r from-primary to-secondary dark:text-black text-white':
-            $route.path == list.path,
+            $route.path == list.path || $route.path == list.detail,
         }"
       >
         <i :class="list.icon + ' font-extrabold text-xl mb-1'"></i>
@@ -63,14 +63,17 @@
         </button>
       </div>
     </div>
-    <div class="flex w-full gap-2 mt-5">
-      <div
-        v-for="theme in themes"
-        :key="theme"
-        class="cursor-pointer w-5 h-5 rounded-full"
-        :class="theme.class"
-        @click="setTheme(theme.name)"
-      ></div>
+    <div class="flex flex-col w-full gap-2 mt-5">
+      <h1 class="text-md font-bold mb-2">{{ $t("sidebar.theme") }}</h1>
+      <div class="flex gap-2">
+        <div
+          v-for="theme in themes"
+          :key="theme"
+          class="cursor-pointer w-5 h-5 rounded-full"
+          :class="theme.class"
+          @click="setTheme(theme.name)"
+        ></div>
+      </div>
     </div>
   </div>
 </template>
@@ -99,6 +102,7 @@ const NavLists = reactive([
     name: t("sidebar.project"),
     path: "/project",
     icon: "jam jam-layout",
+    detail: ["/project/ibb-admin"],
   },
   {
     name: t("sidebar.skill"),

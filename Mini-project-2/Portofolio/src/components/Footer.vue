@@ -8,7 +8,7 @@
         <a
           :href="list.url"
           target="_blank"
-          class="text-2xl hover:bg-gradient-linear hover:text-transparent hover:bg-clip-text text hover:text-3xl"
+          class="text-2xl hover:bg-gradient-to-r from-primary to-secondary hover:text-transparent hover:bg-clip-text text hover:text-3xl"
           :class="list.icon"
         ></a>
       </div>
