@@ -32,7 +32,7 @@
         <RouterLink
           class="text-slate-900 bg-gradient-to-r from-primary to-secondary text-white py-2 px-6 rounded-md font-bold"
           to="/project"
-          >Back</RouterLink
+          >{{ $t("button.back") }}</RouterLink
         >
       </div>
     </section>

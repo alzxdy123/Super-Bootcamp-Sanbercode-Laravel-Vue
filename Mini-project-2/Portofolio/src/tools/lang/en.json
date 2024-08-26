@@ -33,8 +33,9 @@
     "subTitle": "My Projects",
     "projects": {
       "description1": "TO DO project for the Super Bootcamp Sanbercode 2024 assignment.",
-      "description2": "Back End application for a Restful API themed E - Bengkel. It provides services for an admin to perform administrative tasks for their workshop.",
-      "description3": "This project is a task from the Sanbercode Bootcamp. It functions to display movie reviews."
+      "description2": "Back End application for a Restful API themed Review Film. It provides services for application display movie reviews.",
+      "description3": "This project is a task from the Sanbercode Bootcamp. It functions to display movie reviews.",
+      "description4": "My Fullstack project about a library online with web portal user and admin dashboard. I have dashboard admin for 3 activities. The user can borrow and sell books. The admin can manage the library activities and monitor the library performance."
     }
   },
 
@@ -106,5 +107,9 @@
       "item2": "Developed a responsive and clean UI, providing an optimal user experience across various devices.",
       "item3": "Fostered effective and positive team collaboration, enabling the project to be completed on time with satisfying results."
     }
+  },
+
+  "button": {
+    "back": "Back"
   }
 }

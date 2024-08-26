@@ -55,6 +55,14 @@
       >
         Dokumentasi
       </a>
+      <a
+        v-if="project.github"
+        :href="project.github"
+        target="_blank"
+        class="text-slate-900 bg-gradient-to-r from-primary to-secondary text-white py-2 px-6 rounded-md font-bold"
+      >
+        Github
+      </a>
     </div>
   </div>
 </template>

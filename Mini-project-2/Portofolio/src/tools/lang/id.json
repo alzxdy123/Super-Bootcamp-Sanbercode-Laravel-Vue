@@ -34,7 +34,8 @@
     "projects": {
       "description1": "TO DO project untuk tugas dari Super Bootcamp Sanbercode 2024.",
       "description2": "Back End aplikasi untuk Restful API themed E - Bengkel. Melayani admin untuk melakukan tugas administratif untuk workshop mereka.",
-      "description3": "Proyek ini adalah tugas dari Sanbercode Bootcamp. Fungsi proyek ini untuk menampilkan tugas movie review."
+      "description3": "Proyek ini adalah tugas dari Sanbercode Bootcamp. Fungsi proyek ini untuk menampilkan tugas movie review.",
+      "description4": "Project Fullstack saya tentang perpustakaan online yg berisikan web portal user sekaligus dashboard admin, user dapat meminjam ataupun membeli buku. Terdapat juga dashboard admin untuk  melakukan alktivitas pengelolaan dan pemantawan perpustakaan"
     }
   },
 
@@ -106,5 +107,9 @@
       "item2": "Membangun tampilan yang responsif dan rapi, memberikan pengalaman pengguna yangoptimal di berbagai perangkat.",
       "item3": "Kolaborasi tim yang efektif dan positif, yang memungkinkan proyek diselesaikan tepat waktudengan hasil yang memuaskan."
     }
+  },
+
+  "button": {
+    "back": "Kembali"
   }
 }
